@@ -1,4 +1,4 @@
-import images from './constants/Images';
+import images from "./Images";
 
 // Export the `images` object
-export { images };
+export default  images ;

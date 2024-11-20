@@ -1,11 +1,12 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
+import Images from '../constants';
 function Login() {
   return (
     <div
     className="min-h-screen bg-cover bg-center bg-gray-600"
     style={{
-      backgroundImage: `url(${BackgroundImage})`,
+      backgroundImage: `url(${Images.BackgroundImage})`,
       backgroundBlendMode: 'overlay',
     }}
   >
@@ -13,7 +14,7 @@ function Login() {
   <div className="w-full lg:w-full max-w-2xl">
     <div className="p-10">
     <img
-    src={logo}
+    src={Images.MoriseLogo}
     alt="IJH International"
     className="w-full h-auto rounded-xl mb-4"
   />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import {Images} from '../constants';
+import Images from '../constants';
 import { Link } from 'react-router-dom';
 function Signup() {
 
@@ -66,7 +66,7 @@ function Signup() {
     
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-gray-600"
+      className="min-h- bg-cover bg-center bg-gray-600"
       style={{
         backgroundImage: `url(${Images.BackgroundImage})`,
         backgroundBlendMode: 'overlay',
@@ -96,7 +96,7 @@ function Signup() {
             <img
       src={Images.MoriseLogo}
       alt="IJH International"
-      className="w-full h-auto rounded-xl mb-4"
+      className="w-96 h-36 rounded-xl mb-4"
     />
           </div>
         
@@ -112,7 +112,7 @@ function Signup() {
               </a>
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-2">
               <div>
                 <label className="block text-black text-base md:text-lg mb-2 font-medium">
                   Name
