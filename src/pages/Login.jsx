@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Images from "../constants";
 import { loginUser } from "../services/AuthApiManager";
-
+import Cookies from 'js-cookie';
 function Login() {
   // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -60,11 +60,14 @@ function Login() {
     try {
       setIsLoading(true);
       const response = await loginUser(formData);
+      
       if (response.data.status === 200) {
         console.log("login response", response.data);
+
+        Cookies.set('authToken', response.data.data.token, { expires: 1 })
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("userId", JSON.stringify(response.data.data.user));
-        // navigate("/aboutus");
+         navigate("/");
       } else {
         console.log("login error", response.data.message);
       }

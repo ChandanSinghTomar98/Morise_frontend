@@ -6,7 +6,7 @@ import { Camera } from "lucide-react";
 import { Toast } from "../components/Toast";
 function Signup() {
   const [formData, setFormData] = useState({
-    fullname: "",
+    name: "",
     email: "",
     password: "",
     phone: "",
