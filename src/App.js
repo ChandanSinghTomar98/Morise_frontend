@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Layout from './layouts/Layout';
+// import AboutPage from './pages/AboutPage';
 function App() {
   return (
     <Routes>  {/* Routes component holds all your routes */}
@@ -11,8 +12,8 @@ function App() {
     <Route path="/" element={<Layout />}>
       {/* Nested Routes */}
       {/* <Route index element={<HomePage />} />  Default route ("/") */}
-      {/* <Route path="profile" element={<ProfilePage />} />
-      <Route path="aboutus" element={<AboutPage />} /> */}
+      {/* <Route path="profile" element={<ProfilePage />} />*/}
+      {/* <Route path="aboutus" element={<AboutPage />} />  */}
       <Route path="signin" element={<Login />} /> 
       <Route path="signup" element={<Signup/>} />
     </Route>
