@@ -1,33 +1,24 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect ,useContext} from 'react'
 import { BrowserRouter as Router, Routes, Route,Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 import Cookies from 'js-cookie';
+import { AuthContext } from '../context/AuthContext';
 function Layout() {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const { isAuthenticated, login, logout } = useContext(AuthContext);
     const [userToken, setUserToken] = useState('');
-
-   
-    useEffect(() => {
-        // Get the auth token from the cookie
-        const token = Cookies.get('authToken'); // Get the 'authToken' cookie
-    
-        if (token) {
-          setUserToken(token); // Set the token in state
-          setIsAuthenticated(true); // Mark user as authenticated
-        } else {
-          setIsAuthenticated(false); // User is not authenticated
-        }
-      }, []);
+    const username = Cookies.get('authToken')
+   console.log("username",username)
+  
 
   return (
     <div>
         <Navbar/>
 
         {
-            isAuthenticated===true ?(          
+            isAuthenticated ?(          
                 <div className="flex justify-center">
                 {/* Sidebar */}
                 <div className="w-[15%] bg-gray-800 text-white">

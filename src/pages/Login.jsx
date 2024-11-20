@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Images from "../constants";
 import { loginUser } from "../services/AuthApiManager";
 import Cookies from 'js-cookie';
+import { AuthContext } from '../context/AuthContext';
 function Login() {
+
+  const { isAuthenticated, login, logout } = useContext(AuthContext);  
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -67,6 +70,7 @@ function Login() {
         Cookies.set('authToken', response.data.data.token, { expires: 1 })
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("userId", JSON.stringify(response.data.data.user));
+        login()
          navigate("/");
       } else {
         console.log("login error", response.data.message);
