@@ -4,7 +4,7 @@ import Images from "../constants";
 import { loginUser } from "../services/AuthApiManager";
 
 function Login() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
