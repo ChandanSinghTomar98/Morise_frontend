@@ -21,7 +21,7 @@ function Layout() {
             isAuthenticated ?(          
                 <div className="flex justify-center">
                 {/* Sidebar */}
-                <div className="w-[15%] bg-gray-800 text-white">
+                <div className="w-[15%] h-screen text-white">
                   <Sidebar />
                 </div>
               
