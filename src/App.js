@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Layout from './layouts/Layout';
 import About from './pages/About';
 import Profile from './pages/Profile';
+import Certificate from './pages/Certificate';
+import Achievements from "./pages/Achievements"
 function App() {
   return (
     <Routes>  {/* Routes component holds all your routes */}
@@ -18,6 +20,8 @@ function App() {
       <Route path="about" element={<About />} />
       <Route path="signin" element={<Login />} /> 
       <Route path="signup" element={<Signup/>} />
+      <Route path="achievement" element={<Achievements/>} />
+      <Route path="certificate" element={<Certificate/>} />
     </Route>
   </Routes>
   );
