@@ -9,6 +9,7 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import Certificate from './pages/Certificate';
 import Achievements from "./pages/Achievements"
+import Documents from "./pages/Documents";
 function App() {
   return (
     <Routes>  {/* Routes component holds all your routes */}
@@ -22,6 +23,7 @@ function App() {
       <Route path="signup" element={<Signup/>} />
       <Route path="achievement" element={<Achievements/>} />
       <Route path="certificate" element={<Certificate/>} />
+      <Route path="documents" element={<Documents />} />
     </Route>
   </Routes>
   );
