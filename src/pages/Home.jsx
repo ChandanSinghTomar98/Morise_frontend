@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { useNavigate } from "react-router-dom";
 import images from "../constants";
 import Container from "../components/Container";
 import { getUserById } from "../services/UserProfileApiManager";
+import { AuthContext } from "../context/AuthContext";
 
 function Home() {
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
+  const [user, setUser] = useState([]);
 
   const getUser = async (id, token) => {
     return getUserById({
@@ -24,7 +26,8 @@ function Home() {
     if (id && token) {
       getUser(id, token)
         .then((res) => {
-          console.log("get user by id", res);
+          const data = res.data;
+          setUser(data);
         })
         .catch((error) => {
           console.error("Error fetching user data", error);
@@ -59,7 +62,7 @@ function Home() {
             profile
           </div>
           <div className="ml-4">
-            <p className="text-[#000000] font-bold text-xl">Hi, user</p>
+            <p className="text-[#000000] font-bold text-xl">Hi, Nit</p>
             <p className="text-[#000000] text-sm lg:text-base">
               +91 99999-99999
             </p>
