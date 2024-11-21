@@ -1,8 +1,8 @@
 import axios from "axios";
-
-const getBaseURL = () => {
-  return "http://localhost:3001/api/v1";
-};
+import { getBaseURL } from "./BaseUrl";
+// const getBaseURL = () => {
+//   return "http://localhost:3001/api/v1";
+// };
 
 const AuthApiManager = axios.create({
   baseURL: getBaseURL(),

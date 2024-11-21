@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { useNavigate } from "react-router-dom";
 import images from "../constants";
 import Container from "../components/Container";
+import { getUserById } from "../services/UserProfileApiManager";
+
 function Home() {
+  const userId = localStorage.getItem("userId");
+  console.log("userId", userId);
+
+  const getUser = async (id, token) => {
+    return getUserById({
+      id: id,
+      token: token,
+    });
+  };
+
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    if (id && token) {
+      getUser(id, token)
+        .then((res) => {
+          console.log("get user by id", res);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data", error);
+        });
+    }
+  }, []);
   const Navigate = useNavigate();
 
   const handleNavigation = () => {
