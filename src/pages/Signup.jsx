@@ -205,11 +205,11 @@ function Signup() {
             <img
               src={Images.MoriseLogo}
               alt="IJH International"
-              className="w-96 h-36 rounded-xl mb-4"
+              className="w-80 h-auto mx-auto rounded-xl mb-4"
             />
           </div>
 
-          <div className="bg-white rounded-xl shadow-xl p-8 md:p-12 backdrop-blur-md bg-opacity-35 mx-3">
+          <div className="bg-white rounded-xl shadow-xl p-4 md:p-8 backdrop-blur-md bg-opacity-35 mx-3">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Get Started
             </h2>

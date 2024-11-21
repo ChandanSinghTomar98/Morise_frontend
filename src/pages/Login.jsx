@@ -86,23 +86,24 @@ function Login() {
   };
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-gray-600"
+      className=" py-10 bg-cover bg-center bg-gray-600"
       style={{
         backgroundImage: `url(${Images.BackgroundImage})`,
         backgroundBlendMode: "overlay",
       }}
     >
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-10 items-center justify-center min-h-screen py-8">
+      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-10 items-center justify-center">
         <div className="w-full lg:w-full max-w-2xl">
-          <div className="p-10">
+          <div className="">
             <img
               src={Images.MoriseLogo}
               alt="IJH International"
-              className="w-full h-auto rounded-xl mb-4"
+              className="w-80 mx-auto h-auto rounded-xl mb-4"
             />
           </div>
 
-          <div className="bg-white rounded-xl shadow-xl p-8 md:p-12 backdrop-blur-md bg-opacity-35 mx-3">
+          <div className="bg-white rounded-xl shadow-xl p-4 md:p-8
+           backdrop-blur-md bg-opacity-35 mx-3">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Sign In
             </h2>
