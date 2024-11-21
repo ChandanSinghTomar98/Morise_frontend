@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Images from "../constants";
 import { loginUser } from "../services/AuthApiManager";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import { AuthContext } from "../context/AuthContext";
 function Login() {
-  // const navigate = useNavigate();
+  const { isAuthenticated, login, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -60,18 +62,16 @@ function Login() {
     try {
       setIsLoading(true);
       const response = await loginUser(formData);
-      
-      if (response.data.status === 200) {
-        console.log("login response", response.data);
 
-        Cookies.set('authToken', response.data.data.token, { expires: 1 })
+      if (response.data.status === 200) {
+        Cookies.set("authToken", response.data.data.token, { expires: 1 });
         localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("userId", JSON.stringify(response.data.data.user));
-         navigate("/");
+        localStorage.setItem("userId", response.data.data.userId);
+        login();
+        navigate("/");
       } else {
         console.log("login error", response.data.message);
       }
-      console.log("login response", response);
     } catch (error) {
       setLoginError(
         error.response?.data?.message || "An error occurred. Please try again."
