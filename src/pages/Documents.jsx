@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { submitDocuments } from "../services/DocumentsApiManager";
+import DocumentUploadModal from "../components/DocumentUploadModel";
+import DocumentUploadSuccess from "../components/DocumentUploadSuccess";
 
 const Documents = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
   const qualificationLevels = [
     { value: "10th", label: "10th Standard" },
     { value: "12th", label: "12th Standard" },
@@ -99,7 +103,7 @@ const Documents = () => {
   };
 
   const handleSubmit = async () => {
-    const userId = 12345;
+    const userId = localStorage.getItem("userId");
     if (validateFields()) {
       try {
         // Create a FormData object to send files
@@ -123,6 +127,9 @@ const Documents = () => {
           .then((response) => {
             console.log("response", response);
           })
+          .then(() => {
+            setIsSuccessDialogOpen(true);
+          })
           .catch((error) => {
             console.error("Upload error:", error);
           });
@@ -132,9 +139,25 @@ const Documents = () => {
       }
     }
   };
+  console.log("isOpen", isOpen);
 
   return (
     <div className="min-h-screen bg-[#E9EDC9] pt-8 pb-8">
+      {isSuccessDialogOpen && (
+        <DocumentUploadSuccess
+          onClose={() => {
+            setIsSuccessDialogOpen(false);
+          }}
+          orderId="123456"
+        />
+      )}
+      {isOpen && (
+        <DocumentUploadModal
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      )}
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md space-y-6">
         <h1 className="text-3xl font-bold text-[#DBB000] text-center">
           Upload Documents

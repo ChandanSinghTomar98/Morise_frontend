@@ -8,6 +8,7 @@ import { getUserById } from "../services/UserProfileApiManager";
 
 function Home() {
 
+  const [user,setUser]=useState("")
 
   const getUser = async (id, token) => {
  console.log("id hfhf", id, token);
@@ -20,15 +21,23 @@ function Home() {
   useEffect(() => {
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
-    
-getUser(id,token)
-   
-  
+
+    if (id && token) {
+      getUser(id, token)
+        .then((res) => {
+          const data = res.data.data;
+          setUser(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data", error);
+        });
+    }
   }, []);
+
   const Navigate = useNavigate();
 
   const handleNavigation = () => {
-    Navigate("/document");
+    Navigate("/documents");
   };
   const handleProfileNavigate = () => {
     Navigate("/profile");
@@ -50,16 +59,14 @@ getUser(id,token)
       <div className="container bg-[#E9EDC9] p-16 rounded-md shadow-lg  mx-auto sm:flex sm:items-center sm:justify-between">
         <div className="flex items-center sm:w-2/3 lg:w-1/2">
           <div className="h-16 w-16 rounded-full bg-[#DBB000] flex items-center justify-center text-[#000000] font-bold text-lg">
-            profile
+            <img src={user?.image} alt="User's profile" />
           </div>
           <div className="ml-4">
-            <p className="text-[#000000] font-bold text-xl">Hi, user</p>
-            <p className="text-[#000000] text-sm lg:text-base">
-              +91 99999-99999
+            <p className="text-[#000000] font-bold text-xl">
+              Hi, {user?.fullName}
             </p>
-            <p className="text-[#000000] text-sm lg:text-base">
-              email@email.com
-            </p>
+            <p className="text-[#000000] text-sm lg:text-base">{user?.phone}</p>
+            <p className="text-[#000000] text-sm lg:text-base">{user?.email}</p>
           </div>
         </div>
 
