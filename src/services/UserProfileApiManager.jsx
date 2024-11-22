@@ -9,6 +9,7 @@ const UserProfileApiManager = axios.create({
 });
 
 export const getUserById = (data) => {
+  console.log("id hfhf", data);
   return UserProfileApiManager.get(`/get-user-by-id/${data.id}`, {
     headers: {
       authorization: `Bearer ${data.token}`,

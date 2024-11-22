@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import images from "../constants";
+import Images from "../constants/Images";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
@@ -26,35 +26,34 @@ function Navbar() {
     setDropdownOpen(!dropdownOpen);
   };
   return (
-    <nav className="bg-black w-full shadow-sm">
-      <div className="container mx-auto  flex items-center justify-between">
+    <nav className=" bg-black w-full rounded-2xl shadow-sm mt-2">
+      <div className=" mx-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center py-4 space-x-2">
           <Link to="/">
             <img
-              src={images.LogoNav}
+              src={Images.MoriseLogo}
               alt="Morise"
-              className="w-[12rem] h-[7rem]"
+              className="w-[12rem] h-[4rem]"
             />
           </Link>
         </div>
 
-        {/* Icons and Hamburger Menu */}
         <div className="flex items-center space-x-4">
-          {/* Notification Icon */}
-          {/* <button
+          Notification Icon
+          <button
           aria-label="Notifications"
-          className="hidden md:inline text-xl text-gray-500 hover:text-gray-300"
+          className="hidden md:inline text-3xl
+           text-white hover:text-gray-300"
         >
           <FontAwesomeIcon icon={faBell} />
-        </button> */}
+        </button>
 
-          {/* Profile Image with Dropdown */}
           <div className="relative">
             <img
-              src={images.Avatar}
+              src={Images.Avatar}
               alt="Profile"
-              className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
+              className="w-14 h-14 rounded-full border border-gray-300 cursor-pointer"
               onClick={toggleDropdown}
             />
 
@@ -120,7 +119,6 @@ function Navbar() {
             >
               <FontAwesomeIcon icon={faBell} />
             </button>
-            {/* Add mobile links here if needed */}
           </div>
         </div>
       )}

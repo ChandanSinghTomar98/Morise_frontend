@@ -67,7 +67,7 @@ function Login() {
         Cookies.set("authToken", response.data.data.token, { expires: 1 });
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("userId", response.data.data.userId);
-        login();
+        login(response.data.data.token);
         navigate("/");
       } else {
         console.log("login error", response.data.message);

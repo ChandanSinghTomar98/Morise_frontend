@@ -1,5 +1,5 @@
 import React from "react";
-import { Target, Eye, Globe, Zap, Network, CheckCircle } from 'lucide-react';
+import { Target, Eye, Globe, Zap, Network, CheckCircle } from "lucide-react";
 import Images from "../constants/Images";
 
 function About() {
@@ -30,15 +30,21 @@ function About() {
       <section className="container mx-auto px-6 mb-16">
         <div className="bg-white shadow-xl rounded-2xl overflow-hidden flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 p-10">
-            <h2 className="text-3xl font-bold text-yellow-600 mb-6">Who We Are</h2>
+            <h2 className="text-3xl font-bold text-yellow-600 mb-6">
+              Who We Are
+            </h2>
             <p className="text-gray-700 leading-relaxed">
-              IJH is a comprehensive inbound and outbound tour operator based in Dhaka, Bangladesh. We specialize in recruitment services, connecting the right talent to the right job opportunities worldwide. Registered as a Human Resources Firm, we proudly serve as a preferred Recruitment Business Partner for our clients.
+              IJH is a comprehensive inbound and outbound tour operator based in
+              Dhaka, Bangladesh. We specialize in recruitment services,
+              connecting the right talent to the right job opportunities
+              worldwide. Registered as a Human Resources Firm, we proudly serve
+              as a preferred Recruitment Business Partner for our clients.
             </p>
           </div>
           <div className="md:w-1/2 h-full">
-            <img 
+            <img
               src={Images.card2}
-              alt="Company Overview" 
+              alt="Company Overview"
               className="w-full h-full object-cover"
             />
           </div>
@@ -55,15 +61,24 @@ function About() {
               <Target className="w-12 h-12 mr-4" />
               <h3 className="text-2xl font-bold">Our Mission</h3>
             </div>
-            <p className="italic mb-4">"Having the right people for the right job"</p>
-            <p>We go above and beyond to earn customer satisfaction through dedicated service and precise talent matching.</p>
+            <p className="italic mb-4">
+              "Having the right people for the right job"
+            </p>
+            <p>
+              We go above and beyond to earn customer satisfaction through
+              dedicated service and precise talent matching.
+            </p>
           </div>
           <div className="bg-gradient-to-br from-yellow-600 to-yellow-200 rounded-2xl p-8 text-white shadow-xl transform transition-all hover:scale-105">
             <div className="flex items-center mb-6">
               <Eye className="w-12 h-12 mr-4" />
               <h3 className="text-2xl font-bold">Our Vision</h3>
             </div>
-            <p>To provide exceptional travel experiences and be a preferred employer offering an inspirational working environment where employees can thrive and grow.</p>
+            <p>
+              To provide exceptional travel experiences and be a preferred
+              employer offering an inspirational working environment where
+              employees can thrive and grow.
+            </p>
           </div>
         </div>
       </section>
@@ -73,24 +88,24 @@ function About() {
           Our Core Values
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <ValueCard 
-            icon={Zap} 
-            title="Adaptable" 
+          <ValueCard
+            icon={Zap}
+            title="Adaptable"
             description="We thrive in dynamic environments by embracing change and finding innovative solutions to challenges."
           />
-          <ValueCard 
-            icon={CheckCircle} 
-            title="Committed" 
+          <ValueCard
+            icon={CheckCircle}
+            title="Committed"
             description="Our unwavering dedication ensures we consistently deliver value to our customers, partners, and team members."
           />
-          <ValueCard 
-            icon={Network} 
-            title="Straightforward" 
+          <ValueCard
+            icon={Network}
+            title="Straightforward"
             description="We foster transparency and simplicity in communication, building trust and clear understanding."
           />
-          <ValueCard 
-            icon={Globe} 
-            title="Connections" 
+          <ValueCard
+            icon={Globe}
+            title="Connections"
             description="We value meaningful relationships and collaborations that create lasting impacts for individuals and communities."
           />
         </div>
