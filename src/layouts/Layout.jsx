@@ -18,7 +18,8 @@ function Layout() {
 
   return (
     <div>
-      <Navbar />
+      {isAuthenticated ? <Navbar /> : null}
+      {/* <Navbar /> */}
 
       {isAuthenticated ? (
         <div className="flex justify-center">
@@ -37,8 +38,7 @@ function Layout() {
       ) : (
         <Outlet />
       )}
-
-      <Footer />
+      {isAuthenticated ? <Footer /> : null}
     </div>
   );
 }

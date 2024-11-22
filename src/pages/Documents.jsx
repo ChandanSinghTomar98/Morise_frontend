@@ -99,7 +99,7 @@ const Documents = () => {
   };
 
   const handleSubmit = async () => {
-    const userId = 12345;
+    const userId = localStorage.getItem("userId");
     if (validateFields()) {
       try {
         // Create a FormData object to send files
