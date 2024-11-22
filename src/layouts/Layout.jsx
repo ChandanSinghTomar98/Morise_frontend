@@ -17,7 +17,7 @@ function Layout() {
   console.log("username", username);
 
   return (
-    <div>
+    <div className="mx-5">
       <Navbar />
 
       {isAuthenticated ? (
@@ -38,7 +38,7 @@ function Layout() {
         <Outlet />
       )}
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

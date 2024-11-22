@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Images from '../constants';
+import Images from "../constants";
 const Carousel = () => {
   const slides = [
     {
@@ -7,6 +7,7 @@ const Carousel = () => {
       image: Images.carousel1,
       title: "Slide 1",
     },
+
     {
       id: 2,
       image: Images.carousel2,
@@ -37,12 +38,12 @@ const Carousel = () => {
 
   // Autoplay functionality
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000); 
-    return () => clearInterval(interval); 
+    const interval = setInterval(nextSlide, 3000);
+    return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
-    <div className="container mx-auto relative w-full h-[60vh] overflow-hidden">
+    <div className="container  my-5 mx-auto relative w-full h-[60vh] overflow-hidden">
       {/* Carousel Items */}
       <div
         className="flex transition-transform duration-500"
@@ -79,7 +80,6 @@ const Carousel = () => {
         ▶
       </button>
 
- 
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {slides.map((_, index) => (
           <div
