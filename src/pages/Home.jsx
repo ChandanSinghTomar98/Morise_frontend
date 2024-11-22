@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import images from "../constants";
 import Container from "../components/Container";
 import { getUserById } from "../services/UserProfileApiManager";
-import { AuthContext } from "../context/AuthContext";
 
 function Home() {
   const userId = localStorage.getItem("userId");
@@ -34,7 +33,6 @@ function Home() {
         });
     }
   }, []);
-  console.log("user", user);
 
   const Navigate = useNavigate();
 

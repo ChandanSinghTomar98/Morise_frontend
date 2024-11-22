@@ -123,7 +123,7 @@ function Login() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-[#8f8e8e] uppercase text-base text-center md:text-2xl mb-2 font-medium">
+                <label className="block text-[#8f8e8e] uppercase text-base text-center md:text-xl mb-2 font-medium">
                   Email
                 </label>
                 <input
@@ -155,13 +155,13 @@ function Login() {
                 {errors.password && (
                   <p className="mt-1 text-red-500 text-sm">{errors.password}</p>
                 )}
-                <label className="block text-[#8f8e8e] uppercase text-center text-base md:text-2xl mt-1 mb-2 font-medium">
+                <label className="block text-[#8f8e8e] uppercase text-center text-base md:text-xl mt-1 mb-2 font-medium">
                   Password
                 </label>
                 {/* login with otp */}
                 <Link
                   to="/login-otp"
-                  className="text-secondary hover:text-secondary-dark text-center block text-base md:text-lg mt-3"
+                  className="text-secondary hover:text-secondary-dark text-center  block text-base md:text-lg mt-3"
                 >
                   Login with OTP
                 </Link>
