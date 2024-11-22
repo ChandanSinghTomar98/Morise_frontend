@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-import 'sweetalert2/src/sweetalert2.scss';
+// import Swal from 'sweetalert2/dist/sweetalert2.js';
+// import 'sweetalert2/src/sweetalert2.scss';
 import Container from '../components/Container';
 import Images from '../constants';
 function Profile() {
@@ -51,29 +51,29 @@ function Profile() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-end",
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
+  // const Toast = Swal.mixin({
+  //   toast: true,
+  //   position: "bottom-end",
+  //   showConfirmButton: false,
+  //   timer: 2000,
+  //   timerProgressBar: true,
+  //   didOpen: (toast) => {
+  //     toast.onmouseenter = Swal.stopTimer;
+  //     toast.onmouseleave = Swal.resumeTimer;
+  //   },
+  // });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEditing) {
       if (validateForm()) {
         setIsEditing(false)
-        Swal.fire({
-          icon: 'success',
-          title: 'Profile updated successfully!',
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: 'Profile updated successfully!',
+        //   showConfirmButton: false,
+        //   timer: 2000,
+        // });
       }
     } else {
       setIsEditing(true);

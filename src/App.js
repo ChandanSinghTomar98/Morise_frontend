@@ -18,7 +18,7 @@ function App() {
       {/* Layout Route: This will act as the wrapper for all nested routes */}
       <Route path="/" element={<Layout />}>
         {/* Nested Routes */}
-        <Route index element={<Home />} /> Default route ("/")
+        <Route index element={<Home />} /> 
         <Route path="profile" element={<Profile />} />
         <Route path="about" element={<About />} />
         <Route path="signin" element={<Login />} />
