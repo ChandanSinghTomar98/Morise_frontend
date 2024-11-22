@@ -10,28 +10,29 @@ import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
+import ContactModel from "../components/ContactModel";
+
 function Layout() {
   const { isAuthenticated, login, logout } = useContext(AuthContext);
   const [userToken, setUserToken] = useState("");
   const username = Cookies.get("authToken");
-  console.log("username", username);
-
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   return (
     <div>
       {isAuthenticated ? <Navbar /> : null}
       {/* <Navbar /> */}
 
       {isAuthenticated ? (
-        <div className="flex justify-center">
+        <div className="flex justify-between">
           {/* Sidebar */}
-          <div className="w-[15%] bg-gray-800 text-white">
-            <Sidebar />
+          <div className="w-[5%]  text-white">
+            <Sidebar onSupportClick={() => setIsDialogOpen(true)} />
           </div>
 
           {/* Main Content Area */}
-          <div className="w-[85%]">
-            <div className="container mx-auto p-4">
-              <Outlet /> {/* Nested route content goes here */}
+          <div className="w-[95%]">
+            <div className="container mx-auto">
+              <Outlet />
             </div>
           </div>
         </div>
@@ -39,6 +40,10 @@ function Layout() {
         <Outlet />
       )}
       {isAuthenticated ? <Footer /> : null}
+      <ContactModel
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </div>
   );
 }

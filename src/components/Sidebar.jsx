@@ -1,53 +1,78 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
-import { GrAchievement } from "react-icons/gr";
-import { FaInfoCircle } from "react-icons/fa";
-import { MdSpaceDashboard } from "react-icons/md";
-import { IoMdMore } from "react-icons/io";
-function Sidebar() {
+import { Link, useLocation } from "react-router-dom";
+import { Headset, Info, UserPen, CircleUser, House } from "lucide-react";
+
+function Sidebar({ onSupportClick }) {
+  const location = useLocation();
+
+  const navItems = [
+    {
+      path: "/profile",
+      icon: UserPen,
+      onClick: null,
+    },
+    {
+      path: null,
+      icon: Headset,
+      onClick: onSupportClick,
+    },
+    {
+      path: "/about",
+      icon: Info,
+      onClick: null,
+    },
+    {
+      path: "/account",
+      icon: CircleUser,
+      onClick: null,
+    },
+    {
+      path: "/home",
+      icon: House,
+      onClick: null,
+    },
+  ];
+
+  const renderNavItem = ({ path, icon: Icon, onClick, size }) => {
+    const isActive = path && location.pathname === path;
+    const baseSize = size || 28;
+    const activeSize = size ? size + 10 : 38;
+
+    const CommonContent = (
+      <>
+        <Icon
+          size={isActive ? activeSize : baseSize}
+          className={`text-primary transition-all duration-200 ${
+            isActive ? "text-blue-600" : ""
+          }`}
+        />
+      </>
+    );
+
+    const className =
+      "flex items-center justify-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 transition-colors";
+
+    return (
+      <li key={path || "support"} className="flex items-center">
+        {onClick ? (
+          <button onClick={onClick} className={className}>
+            {CommonContent}
+          </button>
+        ) : (
+          <Link to={path} className={className}>
+            {CommonContent}
+          </Link>
+        )}
+      </li>
+    );
+  };
+
   return (
-    <div>
-      <aside
-        id="default-sidebar"
-        className="top-0 left-0 z-40 w-auto h-screen transition-transform -translate-x-full sm:translate-x-0"
-        aria-label="Sidebar"
-      >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-black">
-          <ul className="space-y-2 font-medium">
-            <li className="flex items-center">
-              <FaHome size={25} className="text-gray-500 dark:text-white" />
-              <Link
-                to="/"
-                className="flex-1 ml-3 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <GrAchievement
-                size={25}
-                className="text-gray-500 dark:text-white"
-              />
-              <Link
-                to="/achievement"
-                className="flex-1 ml-3 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                Achievements
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <FaInfoCircle
-                size={25}
-                className="text-gray-500 dark:text-white"
-              />
-              <Link
-                to="/about"
-                className="flex-1 ml-3 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                About Us
-              </Link>
-            </li>
+    <div className="md:fixed md:left-0 md:top-0 fixed bottom-0 left-0 z-30 right-0 md:h-screen w-full md:w-auto bg-white md:bg-transparent">
+      <aside id="default-sidebar" className="h-full" aria-label="Sidebar">
+        <div className="h-full md:px-3 md:py-4">
+          <ul className="flex md:flex-col md:space-y-2 font-medium md:items-start items-center justify-around md:justify-end h-full md:h-screen md:pb-8">
+            {navItems.map(renderNavItem)}
           </ul>
         </div>
       </aside>

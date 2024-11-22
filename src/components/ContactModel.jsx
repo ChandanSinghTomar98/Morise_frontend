@@ -1,7 +1,8 @@
+import { X } from "lucide-react";
 import React from "react";
-import { X, BadgeCheck } from "lucide-react";
 
-const DocumentUploadSuccess = ({ onClose, orderId }) => {
+const ContactModel = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
@@ -15,23 +16,30 @@ const DocumentUploadSuccess = ({ onClose, orderId }) => {
           </button>
 
           {/* Header */}
-
-          <BadgeCheck className="text-green-500" size={30} />
-
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
+            Enter Phone no.
+          </h2>
+          <div>
+            <input
+              type="text"
+              placeholder="Enter Phone no."
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
           {/* Content */}
           <div className="space-y-6">
-            <p className="text-center text-gray-600">
-              YOUR DOCUMENTS ARE UPLOADED SUCCESFULLY!
+            <p className="text-center text-gray-600 uppercase">
+              Whatsapp or call us at+91 1234567890
             </p>
-            <p>OderId {orderId}</p>
-            <p>Check your profile status daily or be in touch with us</p>
+            <p className="uppercase">Or reach us at info@help.com</p>
+
             {/* Action Button */}
             <div className="flex justify-center">
               <button
                 onClick={onClose}
                 className="px-8 py-2 bg-secondary text-primary rounded-lg hover:bg-secondaryDark transition-colors font-medium"
               >
-                Close
+                Request a Call
               </button>
             </div>
           </div>
@@ -41,4 +49,4 @@ const DocumentUploadSuccess = ({ onClose, orderId }) => {
   );
 };
 
-export default DocumentUploadSuccess;
+export default ContactModel;
