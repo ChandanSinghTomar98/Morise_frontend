@@ -5,15 +5,13 @@ import { useNavigate } from "react-router-dom";
 import images from "../constants";
 import Container from "../components/Container";
 import { getUserById } from "../services/UserProfileApiManager";
-import { AuthContext } from "../context/AuthContext";
 
 function Home() {
-  const userId = localStorage.getItem("userId");
-  console.log("userId", userId);
-  const [user, setUser] = useState([]);
+
 
   const getUser = async (id, token) => {
-    return getUserById({
+ console.log("id hfhf", id, token);
+    return await getUserById({
       id: id,
       token: token,
     });
@@ -22,17 +20,10 @@ function Home() {
   useEffect(() => {
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
-
-    if (id && token) {
-      getUser(id, token)
-        .then((res) => {
-          const data = res.data;
-          setUser(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data", error);
-        });
-    }
+    
+getUser(id,token)
+   
+  
   }, []);
   const Navigate = useNavigate();
 
@@ -62,7 +53,7 @@ function Home() {
             profile
           </div>
           <div className="ml-4">
-            <p className="text-[#000000] font-bold text-xl">Hi, Nit</p>
+            <p className="text-[#000000] font-bold text-xl">Hi, user</p>
             <p className="text-[#000000] text-sm lg:text-base">
               +91 99999-99999
             </p>

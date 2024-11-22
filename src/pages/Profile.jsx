@@ -67,7 +67,7 @@ function Profile() {
     e.preventDefault();
     if (isEditing) {
       if (validateForm()) {
-        setIsEditing(false);
+        setIsEditing(false)
         Swal.fire({
           icon: 'success',
           title: 'Profile updated successfully!',

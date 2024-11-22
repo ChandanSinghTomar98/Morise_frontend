@@ -12,9 +12,7 @@ import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
 function Layout() {
   const { isAuthenticated, login, logout } = useContext(AuthContext);
-  const [userToken, setUserToken] = useState("");
-  const username = Cookies.get("authToken");
-  console.log("username", username);
+
 
   return (
     <div>
