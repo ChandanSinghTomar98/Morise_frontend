@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Eye } from "lucide-react";
 import { CreditCard, Phone } from "lucide-react";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
-// import Swal from "sweetalert2/dist/sweetalert2.js";
-// import "sweetalert2/src/sweetalert2.scss";
+import Images from "../constants/Images";
 import { useNavigate } from "react-router-dom";
 import { getUserById } from "../services/UserProfileApiManager";
 
@@ -65,23 +64,13 @@ function Home() {
   }, []);
   const Navigate = useNavigate();
 
-  // const handleNavigation = () => {
-  //   Navigate("/document");
-  // };
-  // const handleProfileNavigate = () => {
-  //   Navigate("/profile");
-  // };
-  // const Toast = Swal.mixin({
-  //   toast: true,
-  //   position: "bottom-end",
-  //   showConfirmButton: false,
-  //   timer: 2000,
-  //   timerProgressBar: true,
-  //   didOpen: (toast) => {
-  //     toast.onmouseenter = Swal.stopTimer;
-  //     toast.onmouseleave = Swal.resumeTimer;
-  //   },
-  // });
+  const handleNavigation = () => {
+    Navigate("/document");
+  };
+  const handleProfileNavigate = () => {
+    Navigate("/profile");
+  };
+
 
   const testimonials = [
     {
@@ -92,7 +81,7 @@ function Home() {
       rating: 5,
       testimonial:
         "Morise helped me achieve my dream job abroad. The process was smooth and professional.",
-      videoUrl: "/api/placeholder/800/450",
+      videoUrl: Images.video1,
     },
     {
       id: 2,
@@ -102,7 +91,7 @@ function Home() {
       rating: 5,
       testimonial:
         "Outstanding support throughout my visa application process. Highly recommended!",
-      videoUrl: "/api/placeholder/800/450",
+      videoUrl: Images.video2,
     },
     {
       id: 3,
@@ -112,7 +101,7 @@ function Home() {
       rating: 5,
       testimonial:
         "The Morise team made my international career transition seamless and stress-free.",
-      videoUrl: "/api/placeholder/800/450",
+      videoUrl:Images.video3,
     },
   ];
 
@@ -132,6 +121,14 @@ function Home() {
 
   return (
     <div className="container mx-auto py-7 ">
+       <div className="mb-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Welcome to <span className="text-primary">Morise</span>
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Your gateway to international career opportunities
+          </p>
+        </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg-px-16 md:px-16">
         {/* Morise Card Section */}
         <div className="bg-white rounded-2xl shadow-lg border  p-4">
@@ -178,7 +175,7 @@ function Home() {
 
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
+                {/* <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div> */}
               </div>
             )}
 
@@ -206,7 +203,7 @@ function Home() {
       <div className="max-w-8xl mx-auto lg-px-16 md:px-16 p-4">
       <div className="bg-white rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+          <div className="w-2 h-12 rounded-full bg-- hidden sm:block"></div>
           <h2 className="text-xl font-semibold text-gray-800">
             Book Free Consultation
           </h2>
@@ -293,7 +290,7 @@ function Home() {
       </div>
 
       {/* testimonial */}
-      <div className="bg-gray-50 py-16 px-4">
+      <div className=" py-10 px-4">
         <div className="max-w-6xl mx-auto mb-12 text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
             What Our Clients Say
