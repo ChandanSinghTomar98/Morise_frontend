@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Headset, Info, UserPen, CircleUser, House } from "lucide-react";
+import { Headset, Info, CircleUser, House, UserRoundPen } from "lucide-react";
 
 function Sidebar({ onSupportClick }) {
   const location = useLocation();
@@ -8,12 +8,14 @@ function Sidebar({ onSupportClick }) {
   const navItems = [
     {
       path: "/profile",
-      icon: UserPen,
+      icon: UserRoundPen,
+      color: "text-red-500",
       onClick: null,
     },
     {
       path: null,
       icon: Headset,
+      color: "text-yellow-500",
       onClick: onSupportClick,
     },
     {
@@ -24,26 +26,44 @@ function Sidebar({ onSupportClick }) {
     {
       path: "/account",
       icon: CircleUser,
+      color: "text-blue-500",
       onClick: null,
     },
     {
       path: "/",
       icon: House,
+      color: "text-green-600",
       onClick: null,
     },
   ];
 
-  const renderNavItem = ({ path, icon: Icon, onClick, size }) => {
+  const renderNavItem = ({ path, icon: Icon, color, onClick, size }) => {
     const isActive = path && location.pathname === path;
-    const baseSize = size || 28;
+    const baseSize = size || 40;
     const activeSize = size ? size + 10 : 38;
 
     const CommonContent = (
+      // <>
+      //   <Icon
+      //     size={isActive ? activeSize : baseSize}
+      //     // className={`text-primary transition-all duration-200 ${
+      //     //   isActive ? "text-blue-600" : ""
+      //     // }`}
+      //     className={`text-primary transition-all duration-200 ${
+      //       isActive ? "text-blue-600" : ""
+      //     } ${isActive ? "sm:text-[28px] md:text-[28px] lg:text-[48px]" : "sm:text-[28px] md:text-[28px] lg:text-[42px]"}`}
+      //   />
+      // </>
       <>
+
         <Icon
-          size={isActive ? activeSize : baseSize}
-          className={`text-primary transition-all duration-200 ${
-            isActive ? "text-blue-600" : ""
+          size={isActive ? activeSize : baseSize} 
+          className={`transition-all duration-200 ${
+            isActive ? "text-white bg-blue-500 rounded-full p-1" : color
+          } ${
+            isActive
+              ? "sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" 
+              : "sm:w-14 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" 
           }`}
         />
       </>
@@ -68,9 +88,9 @@ function Sidebar({ onSupportClick }) {
   };
 
   return (
-    <div className=" md:fixed md:left-0 md:top-0 fixed bottom-0 left-0 z-30 right-0 md:h-screen w-full md:w-64 bg-white md:bg-transparent">
+    <div className=" md:fixed md:left-0 md:top-0 fixed bottom-0 left-0 z-30 right-0 md:h-screen w-full md:w-32 bg-white md:bg-transparent">
       <aside id="default-sidebar" className="h-full" aria-label="Sidebar">
-        <div className="h-full md:px-3 md:py-4">
+        <div className="h-full md:px-3 md:py-4 shadow-lg">
           <ul className="flex md:flex-col md:space-y-2 font-medium md:items-start items-center justify-around md:justify-end h-full md:h-screen md:pb-20">
             {navItems.map(renderNavItem)}
           </ul>

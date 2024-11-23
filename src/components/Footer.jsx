@@ -5,7 +5,7 @@ import { FaLinkedin, FaWhatsapp, FaFacebook, FaTwitter } from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="hidden md:block bg-[#f5f5dc] py-4 text-sm text-gray-800">
+    <footer className="hidden md:block shadow-2xl border  py-4 text-sm text-gray-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
           <div className="flex items-center space-x-4">
