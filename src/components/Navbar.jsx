@@ -18,7 +18,7 @@ function Navbar() {
   const handleLogout = () => {
     logout();
     localStorage.removeItem("token");
-    localStorage.removeItem("userId"); // Clear any stored auth token
+    localStorage.removeItem("userId"); 
     navigate("/signin");
     setDropdownOpen(!dropdownOpen);
   };
