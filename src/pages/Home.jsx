@@ -167,13 +167,13 @@ function Home() {
             </div>
           </div>
 
-          <div className="p-6 rounded-lg bg-[#111827]">
-            <div className="bg-gray-900 text-white p-8 rounded-lg shadow-lg">
+          <div className="p-6 rounded-lg bg-primary">
+            <div className=" text-white p-8 rounded-lg ">
               <h2 className="text-lg font-medium mb-4">
                 Upload your documents securely for quick processing / Need
                 Assistance
               </h2>
-              <button className="w-full bg-primary  md:mt-16 lg:mt-16  hover:bg-blue-800 text-white py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors">
+              <button className="w-full bg-white text-primary md:mt-16 lg:mt-16  hover:bg-gray-200  py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors">
                 <span className="font-medium">
                   Get Started / Need Assistance
                 </span>

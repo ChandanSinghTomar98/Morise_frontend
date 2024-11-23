@@ -62,8 +62,8 @@ function Sidebar({ onSupportClick }) {
             isActive ? "text-white bg-blue-500 rounded-full p-1" : color
           } ${
             isActive
-              ? "sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" 
-              : "sm:w-14 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" 
+              ? "sm:w-12 sm:h-12  md:w-10 md:h-10 lg:w-12 lg:h-12" 
+              : "sm:w-12 sm:h-12 md:w-8 md:h-8 lg:w-10 lg:h-10" 
           }`}
         />
       </>
@@ -90,7 +90,7 @@ function Sidebar({ onSupportClick }) {
   return (
     <div className=" md:fixed md:left-0 md:top-0 fixed bottom-0 left-0 z-30 right-0 md:h-screen w-full md:w-32 bg-white md:bg-transparent">
       <aside id="default-sidebar" className="h-full" aria-label="Sidebar">
-        <div className="h-full md:px-3 md:py-4 shadow-lg">
+        <div className="h-full md:px-3 md:py-4 ">
           <ul className="flex md:flex-col md:space-y-2 font-medium md:items-start items-center justify-around md:justify-end h-full md:h-screen md:pb-20">
             {navItems.map(renderNavItem)}
           </ul>
