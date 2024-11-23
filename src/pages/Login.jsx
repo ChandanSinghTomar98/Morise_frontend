@@ -67,7 +67,7 @@ function Login() {
         Cookies.set("authToken", response.data.data.token, { expires: 1 });
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("userId", response.data.data.userId);
-        login();
+        login(response.data.data.token);
         navigate("/");
       } else {
         console.log("login error", response.data.message);
@@ -82,11 +82,11 @@ function Login() {
   };
   return (
     <div
-      className=" py-10 bg-cover bg-center bg-gray-600"
-      style={{
-        backgroundImage: `url(${Images.BackgroundImage})`,
-        backgroundBlendMode: "overlay",
-      }}
+      className=" py-10 bg-cover bg-center "
+      // style={{
+      //   // backgroundImage: `url(${Images.BackgroundImage})`,
+      //   backgroundBlendMode: "overlay",
+      // }}
     >
       <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-10 items-center justify-center">
         <div className="w-full lg:w-full max-w-2xl">
@@ -98,18 +98,20 @@ function Login() {
             />
           </div>
 
-          <div className="bg-white rounded-xl shadow-xl p-4 md:p-8
-           backdrop-blur-md bg-opacity-35 mx-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-              Sign In
+          <div
+            className="bg-white rounded-xl p-4 md:p-8
+           backdrop-blur-md bg-opacity-35 mx-3"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-4">
+              Login Now
             </h2>
-            <p className="text-base md:text-lg text-black mb-8">
+            <p className="text-base md:text-lg text-black text-center  mb-8">
               Don't have an account?{" "}
               <Link
                 to="/signup"
-                className="text-red-500 font-semibold hover:text-red-700"
+                className="text-red-500 font-semibold  hover:text-red-700"
               >
-                Sign Up
+                Register Now
               </Link>
             </p>
 
@@ -121,7 +123,7 @@ function Login() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                <label className="block text-[#8f8e8e] uppercase text-base text-center md:text-xl mb-2 font-medium">
                   Email
                 </label>
                 <input
@@ -129,10 +131,10 @@ function Login() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Enter your Email"
+                  placeholder="make@dreams.com"
                   className={`w-full p-4 border ${
                     errors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg`}
+                  } rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary bg-[#ececec] text-base md:text-lg placeholder:text-center`}
                 />
                 {errors.email && (
                   <p className="mt-1 text-red-500 text-sm">{errors.email}</p>
@@ -140,9 +142,6 @@ function Login() {
               </div>
 
               <div>
-                <label className="block text-black text-base md:text-lg mb-2 font-medium">
-                  Password
-                </label>
                 <input
                   type="password"
                   name="password"
@@ -151,17 +150,27 @@ function Login() {
                   placeholder="********"
                   className={`w-full p-4 border ${
                     errors.password ? "border-red-500" : "border-gray-300"
-                  } rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg`}
+                  } rounded-xl focus:outline-none focus:ring-2 bg-[#ececec] focus:ring-secondary text-base placeholder:text-center md:text-lg`}
                 />
                 {errors.password && (
                   <p className="mt-1 text-red-500 text-sm">{errors.password}</p>
                 )}
+                <label className="block text-[#8f8e8e] uppercase text-center text-base md:text-xl mt-1 mb-2 font-medium">
+                  Password
+                </label>
+                {/* login with otp */}
+                <Link
+                  to="/login-otp"
+                  className="text-secondary hover:text-secondary-dark text-center  block text-base md:text-lg mt-3"
+                >
+                  Login with OTP
+                </Link>
               </div>
 
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full bg-secondary text-white py-4 rounded-xl font-semibold 
+                className={`w-full bg-secondary text-primary py-4 rounded-xl font-semibold 
                   hover:bg-secondary transition-colors text-base md:text-lg
                   ${isLoading ? "opacity-70 cursor-not-allowed" : ""}
                 `}
@@ -170,14 +179,14 @@ function Login() {
               </button>
             </form>
 
-            <div className="mt-4 text-center">
+            {/* <div className="mt-4 text-center">
               <Link
                 to="/forgot-password"
                 className="text-secondary hover:text-secondary-dark"
               >
                 Forgot Password?
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

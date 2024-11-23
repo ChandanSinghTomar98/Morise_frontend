@@ -6,11 +6,13 @@ import { Camera } from "lucide-react";
 import { Toast } from "../components/Toast";
 function Signup() {
   const [formData, setFormData] = useState({
+    initial: "",
     name: "",
     email: "",
     password: "",
     phone: "",
     dob: "",
+    occupation: "",
     referenceCode: "",
     image: null,
   });
@@ -21,7 +23,9 @@ function Signup() {
   // Validate inputs
   const validate = () => {
     const newErrors = {};
-
+    if (!formData.initial) {
+      newErrors.initial = "Initial is required.";
+    }
     // Name validation
     if (!formData.name.trim()) {
       newErrors.name = "Name is required.";
@@ -177,29 +181,8 @@ function Signup() {
     }
   };
   return (
-    <div
-      className="min-h- bg-cover bg-center bg-gray-600"
-      style={{
-        backgroundImage: `url(${Images.BackgroundImage})`,
-        backgroundBlendMode: "overlay",
-      }}
-    >
+    <div className="min-h- bg-cover bg-cente">
       <div className=" max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-10 items-center justify-center min-h-screen py-8">
-        {/* Welcome Container */}
-        {/* <div className="w-full lg:w-1/2 max-w-2xl "> */}
-        {/* <div className="bg-white rounded-xl shadow-xl p-8 md:p-12 backdrop-blur-md bg-opacity-70"> */}
-        {/* <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6 ">
-              Welcome to Ijh International
-            </h1> */}
-        {/* <p className="text-gray-600 text-lg md:text-xl lg:text-2xl mb-12 leading-relaxed">
-              We are a community, together helping thousands of people out there who are struggling.IJH is a comprehensive inbound and outbound tour operator in Dhaka, Bangladesh. Also, IJH Recruitment is a boutique recruitment firm that specializes in matching the right talent to the right job opportunities across the world. IJH Recruitment is registered as a Human Resources Firm. We work on exclusive assignments as we are a preferred Recruitment Business Partner for our clients.
-            </p>
-             */}
-        {/* </div> */}
-        {/* </div> */}
-
-        {/* Sign Up Container */}
-
         <div className="w-full lg:w-full max-w-2xl ">
           <div className="">
             <img
@@ -209,17 +192,17 @@ function Signup() {
             />
           </div>
 
-          <div className="bg-white rounded-xl shadow-xl p-4 md:p-8 backdrop-blur-md bg-opacity-35 mx-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-              Get Started
+          <div className="bg-white rounded-xl p-4 md:p-8 backdrop-blur-md bg-opacity-35 mx-3">
+            <h2 className="text-2xl md:text-3xl text-center font-bold text-primary mb-4">
+              Create new account
             </h2>
-            <p className="text-base md:text-lg text-black mb-8">
-              Already have an account? &nbsp;
+            <p className="text-base md:text-lg text-center text-black mb-2">
+              Already Registered? &nbsp;
               <Link
-                className="text-red-500 font-semibold hover:text-red-700"
+                className="text-red-500  font-semibold hover:text-red-700"
                 to={"/Signin"}
               >
-                Sign in
+                Login Here
               </Link>
             </p>
 
@@ -227,27 +210,55 @@ function Signup() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Left Column - Personal Details */}
                 <div className="space-y-4">
-                  <h2 className="text-xl font-bold mb-4">Personal Details</h2>
+                  <h2 className="text-xl font-bold mb-4 text-primary text-center">
+                    Personal Details
+                  </h2>
 
-                  <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Enter Your Name"
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
-                    />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm">{errors.name}</p>
-                    )}
+                  <div className="flex space-x-4">
+                    <div className="w-1/4">
+                      <label className="block text-[#8f8e8e] text-base text-center md:text-lg mb-2 font-medium">
+                        Initials
+                      </label>
+                      <select
+                        name="initial"
+                        value={formData.initial}
+                        onChange={handleInputChange}
+                        className="w-full py-5 border border-gray-300 bg-[#ececec] text-[#8f8e8e] rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-sm"
+                      >
+                        <option value="" className="text-[#8f8e8e]">
+                          Select Initial
+                        </option>
+                        <option value="Mr" className="text-[#8f8e8e]">
+                          Mr
+                        </option>
+                        <option value="Ms" className="text-[#8f8e8e]">
+                          Ms
+                        </option>
+                        <option value="Mrs" className="text-[#8f8e8e]">
+                          Mrs
+                        </option>
+                      </select>
+                    </div>
+                    <div className="w-3/4">
+                      <label className="block text-[#8f8e8e] text-center text-base md:text-lg mb-2 font-medium">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Enter Your Name"
+                        className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                      />
+                      {errors.name && (
+                        <p className="text-red-500 text-sm">{errors.name}</p>
+                      )}
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                    <label className="block text-[#8f8e8e] text-center text-base md:text-lg mb-2 font-medium">
                       Email
                     </label>
                     <input
@@ -256,7 +267,7 @@ function Signup() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="Enter Your Email"
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                      className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
                     />
                     {errors.email && (
                       <p className="text-red-500 text-sm">{errors.email}</p>
@@ -264,7 +275,7 @@ function Signup() {
                   </div>
 
                   <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                    <label className="block text-[#8f8e8e] text-center text-base md:text-lg mb-2 font-medium">
                       Phone Number
                     </label>
                     <input
@@ -273,15 +284,28 @@ function Signup() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="Enter Your Phone Number"
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                      className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
                     />
                     {errors.phone && (
                       <p className="text-red-500 text-sm">{errors.phone}</p>
                     )}
                   </div>
+                  <div>
+                    <label className="block text-[#8f8e8e] text-center text-base md:text-lg mb-2 font-medium">
+                      Occupation
+                    </label>
+                    <input
+                      type="text"
+                      name="occupation"
+                      value={formData.occupation}
+                      onChange={handleInputChange}
+                      placeholder="Enter Your Occupation"
+                      className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                    />
+                  </div>
 
                   <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                    <label className="block text-[#8f8e8e] text-center text-base md:text-lg mb-2 font-medium">
                       Date of Birth
                     </label>
                     <input
@@ -289,7 +313,7 @@ function Signup() {
                       name="dob"
                       value={formData.dob}
                       onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                      className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
                     />
                     {errors.dob && (
                       <p className="text-red-500 text-sm">{errors.dob}</p>
@@ -299,10 +323,12 @@ function Signup() {
 
                 {/* Right Column - Account Details & Image */}
                 <div className="space-y-4">
-                  <h2 className="text-xl font-bold mb-4">Account Details</h2>
+                  <h2 className="text-xl font-bold text-primary text-center mb-4">
+                    Account Details
+                  </h2>
 
                   <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                    <label className="block text-[#8f8e8e]  text-base md:text-lg text-center mb-2 font-medium">
                       Password
                     </label>
                     <input
@@ -311,7 +337,7 @@ function Signup() {
                       value={formData.password}
                       onChange={handleInputChange}
                       placeholder="********"
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                      className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
                     />
                     {errors.password && (
                       <p className="text-red-500 text-sm">{errors.password}</p>
@@ -319,7 +345,7 @@ function Signup() {
                   </div>
 
                   <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                    <label className="block text-[#8f8e8e] text-base text-center md:text-lg mb-2 font-medium">
                       Reference Code
                     </label>
                     <input
@@ -328,7 +354,7 @@ function Signup() {
                       value={formData.referenceCode}
                       onChange={handleInputChange}
                       placeholder="Fill the Code"
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
+                      className="w-full p-4 border bg-[#ececec] border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary text-base md:text-lg"
                     />
                     {errors.referenceCode && (
                       <p className="text-red-500 text-sm">
@@ -338,7 +364,7 @@ function Signup() {
                   </div>
 
                   <div>
-                    <label className="block text-black text-base md:text-lg mb-2 font-medium">
+                    <label className="block text-[#8f8e8e] text-base text-center md:text-lg mb-2 font-medium">
                       Profile Picture
                     </label>
                     <div className="flex flex-col items-center p-4 border-2 border-dashed border-gray-300 rounded-xl">
@@ -373,7 +399,7 @@ function Signup() {
 
               <button
                 type="submit"
-                className="w-full mt-8 bg-secondary text-white py-4 rounded-xl font-semibold hover:bg-yellow-600 transition-colors text-base md:text-lg"
+                className="w-full mt-8 bg-secondary text-primary py-4 rounded-xl font-semibold hover:bg-yellow-600 transition-colors text-base md:text-lg"
               >
                 Sign Up
               </button>

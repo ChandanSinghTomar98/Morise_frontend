@@ -7,7 +7,6 @@ import Images from "../constants/Images";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  
   const { logout } = React.useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -18,8 +17,8 @@ function Navbar() {
 
   const handleLogout = () => {
     logout();
-    localStorage.removeItem("token"); 
-    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId"); // Clear any stored auth token
     navigate("/signin");
     setDropdownOpen(!dropdownOpen);
   };
@@ -78,6 +77,15 @@ function Navbar() {
                       onClick={() => setDropdownOpen(false)}
                     >
                       Documents
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/account"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Settings and Help
                     </Link>
                   </li>
                   <li
