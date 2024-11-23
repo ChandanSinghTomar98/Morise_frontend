@@ -17,6 +17,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        {/* Nested Routes */}
         <Route index element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="about" element={<About />} />

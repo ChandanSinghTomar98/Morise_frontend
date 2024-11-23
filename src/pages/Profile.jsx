@@ -159,6 +159,7 @@ function Profile() {
         <button
           type="submit"
           className="w-full py-2 mt-4 text-white font-bold bg-[#DBB000] rounded-lg hover:bg-[#000000] hover:text-[#DBB000] transition duration-200"
+          
         >
           {isEditing ? 'Save Changes' : 'Edit Profile'}
         </button>

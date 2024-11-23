@@ -6,7 +6,8 @@ import SignatureCanvas from "../components/SignatureCanvas";
 
 const Documents = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [isOpenCanvas, setIsOpenCanvas] = useState(false);
+  const [signature, setSignature] = useState(null);
+
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
   const qualificationLevels = [
     { value: "10th", label: "10th Standard" },
@@ -33,7 +34,18 @@ const Documents = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const handleSignatureSave = (signatureData) => {
+    console.log("sign", signatureData);
 
+    setDocuments((prev) => ({
+      ...prev,
+      sign: signatureData,
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      sign: signatureData ? "" : "Signature is required.",
+    }));
+  };
   const handleQualificationChange = (e) => {
     const newQualification = e.target.value;
     setQualification(newQualification);
@@ -55,6 +67,7 @@ const Documents = () => {
       { label: "Aadhar Back", field: "aadharBack" },
       { label: "Pan Card", field: "panFile" },
       { label: "Passport Size Photo", field: "image" },
+      { label: "Signature", field: "sign" },
       { label: "10th Marksheet", field: "matriculation" },
     ];
 
@@ -98,6 +111,10 @@ const Documents = () => {
         newErrors[field] = "This document is required.";
       }
     });
+
+    if (!documents.sign) {
+      newErrors.sign = "Signature is required.";
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -212,8 +229,10 @@ const Documents = () => {
                 )}
               </div>
             ))}
-
-            <SignatureCanvas />
+            <SignatureCanvas onSave={handleSignatureSave} />
+            {errors.sign && (
+              <p className="text-sm text-red-500 mt-1">{errors.sign}</p>
+            )}
 
             {/* Additional Options */}
             <div className="space-y-2">

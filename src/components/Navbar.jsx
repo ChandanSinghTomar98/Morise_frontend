@@ -26,7 +26,7 @@ function Navbar() {
     setDropdownOpen(!dropdownOpen);
   };
   return (
-    <nav className=" bg-black w-full rounded-2xl shadow-sm mt-2">
+    <nav className=" bg-[#111827] w-full rounded-2xl shadow-sm mt-2">
       <div className=" mx-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center py-4 space-x-2">
@@ -40,7 +40,6 @@ function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          Notification Icon
           <button
           aria-label="Notifications"
           className="hidden md:inline text-3xl

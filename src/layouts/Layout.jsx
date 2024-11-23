@@ -25,13 +25,13 @@ function Layout() {
       {isAuthenticated ? (
         <div className="flex justify-between">
           {/* Sidebar */}
-          <div className="w-[5%]  text-white">
+          <div className="w-[2%]  text-white">
             <Sidebar onSupportClick={() => setIsDialogOpen(true)} />
           </div>
 
           {/* Main Content Area */}
-          <div className="w-[95%]">
-            <div className="container mx-auto">
+          <div className="w-[98%]">
+            <div className=" ">
               <Outlet />
             </div>
           </div>
