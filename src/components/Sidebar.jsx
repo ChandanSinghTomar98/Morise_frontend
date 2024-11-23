@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Headset, Info, UserPen, CircleUser, House } from "lucide-react";
+import { Phone, Info, UserPen, CircleUser, House } from "lucide-react";
 
 function Sidebar({ onSupportClick }) {
   const location = useLocation();
@@ -13,7 +13,7 @@ function Sidebar({ onSupportClick }) {
     },
     {
       path: null,
-      icon: Headset,
+      icon: Phone,
       onClick: onSupportClick,
     },
     {
@@ -27,7 +27,7 @@ function Sidebar({ onSupportClick }) {
       onClick: null,
     },
     {
-      path: "/home",
+      path: "/",
       icon: House,
       onClick: null,
     },
@@ -68,10 +68,10 @@ function Sidebar({ onSupportClick }) {
   };
 
   return (
-    <div className="md:fixed md:left-0 md:top-0 fixed bottom-0 left-0 z-30 right-0 md:h-screen w-full md:w-auto bg-white md:bg-transparent">
+    <div className=" md:fixed md:left-0 md:top-0 fixed bottom-0 left-0 z-30 right-0 md:h-screen w-full md:w-64 bg-white md:bg-transparent">
       <aside id="default-sidebar" className="h-full" aria-label="Sidebar">
         <div className="h-full md:px-3 md:py-4">
-          <ul className="flex md:flex-col md:space-y-2 font-medium md:items-start items-center justify-around md:justify-end h-full md:h-screen md:pb-8">
+          <ul className="flex md:flex-col md:space-y-2 font-medium md:items-start items-center justify-around md:justify-end h-full md:h-screen md:pb-20">
             {navItems.map(renderNavItem)}
           </ul>
         </div>

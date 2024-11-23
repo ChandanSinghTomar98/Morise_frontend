@@ -5,7 +5,7 @@ import { Eye } from "lucide-react";
 import { CreditCard, Phone } from "lucide-react";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUserById } from "../services/UserProfileApiManager";
 
 function Home() {
@@ -172,9 +172,9 @@ function Home() {
               Upload your documents securely for quick processing / Need
               Assistance
             </h2>
-            <button className="w-full bg-primary  md:mt-16 lg:mt-16  hover:bg-blue-800 text-white py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors">
+            <Link to='/documents' className="w-full bg-primary  md:mt-16 lg:mt-16  hover:bg-blue-800 text-white py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors">
               <span className="font-medium">Get Started / Need Assistance</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

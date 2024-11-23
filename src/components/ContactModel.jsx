@@ -1,7 +1,17 @@
 import { X } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 
 const ContactModel = ({ isOpen, onClose }) => {
+   useEffect(() => {
+     if (isOpen) {
+       document.body.style.overflow = "hidden"; // Prevent background scroll
+     } else {
+       document.body.style.overflow = ""; // Restore scroll
+     }
+     return () => {
+       document.body.style.overflow = ""; // Cleanup on unmount
+     };
+   }, [isOpen]);
     if (!isOpen) return null;
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
@@ -31,7 +41,7 @@ const ContactModel = ({ isOpen, onClose }) => {
             <p className="text-center text-gray-600 uppercase">
               Whatsapp or call us at+91 1234567890
             </p>
-            <p className="uppercase">Or reach us at info@help.com</p>
+            <p className="uppercase text-center">Or reach us at info@help.com</p>
 
             {/* Action Button */}
             <div className="flex justify-center">

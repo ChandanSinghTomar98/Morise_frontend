@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { submitDocuments } from "../services/DocumentsApiManager";
 import DocumentUploadModal from "../components/DocumentUploadModel";
 import DocumentUploadSuccess from "../components/DocumentUploadSuccess";
+import SignatureCanvas from "../components/SignatureCanvas";
 
 const Documents = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isOpenCanvas, setIsOpenCanvas] = useState(false);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
   const qualificationLevels = [
     { value: "10th", label: "10th Standard" },
@@ -19,8 +21,8 @@ const Documents = () => {
     aadharFront: null,
     aadharBack: null,
     panFile: null,
-    sign: null,
     image: null,
+    sign: null,
     matriculation: null,
     intermediate: null,
     graduation: null,
@@ -53,7 +55,6 @@ const Documents = () => {
       { label: "Aadhar Back", field: "aadharBack" },
       { label: "Pan Card", field: "panFile" },
       { label: "Passport Size Photo", field: "image" },
-      { label: "NOC with Signature (PDF only)", field: "sign" },
       { label: "10th Marksheet", field: "matriculation" },
     ];
 
@@ -139,10 +140,9 @@ const Documents = () => {
       }
     }
   };
-  console.log("isOpen", isOpen);
 
   return (
-    <div className="min-h-screen bg-[#E9EDC9] pt-8 pb-8">
+    <div className="min-h-screen  pt-8 pb-8">
       {isSuccessDialogOpen && (
         <DocumentUploadSuccess
           onClose={() => {
@@ -196,6 +196,7 @@ const Documents = () => {
                 <label className="block font-semibold text-[#000000]">
                   {label} {!optional && "*"}
                 </label>
+
                 <input
                   type="file"
                   onChange={(e) => handleFileChange(e, field)}
@@ -204,13 +205,15 @@ const Documents = () => {
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-300 focus:border-[#DBB000]"
                   }`}
-                  accept={field === "nocWithSign" ? ".pdf" : "image/*,.pdf"}
+                  accept={field === "sign" ? "" : "image/*,.pdf"}
                 />
                 {errors[field] && (
                   <p className="text-sm text-red-500 mt-1">{errors[field]}</p>
                 )}
               </div>
             ))}
+
+            <SignatureCanvas />
 
             {/* Additional Options */}
             <div className="space-y-2">

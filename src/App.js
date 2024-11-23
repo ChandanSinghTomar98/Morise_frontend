@@ -10,15 +10,14 @@ import Certificate from "./pages/Certificate";
 import Achievements from "./pages/Achievements";
 import Documents from "./pages/Documents";
 import Account from "./pages/Account";
+import Referals from "./pages/Referals";
+import Rewards from "./pages/Rewards";
+
 function App() {
   return (
     <Routes>
-      {" "}
-      {/* Routes component holds all your routes */}
-      {/* Layout Route: This will act as the wrapper for all nested routes */}
       <Route path="/" element={<Layout />}>
-        {/* Nested Routes */}
-        <Route path="home" index element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="about" element={<About />} />
         <Route path="signin" element={<Login />} />
@@ -27,6 +26,8 @@ function App() {
         <Route path="certificate" element={<Certificate />} />
         <Route path="documents" element={<Documents />} />
         <Route path="account" element={<Account />} />
+        <Route path="referals" element={<Referals />} />
+        <Route path="rewards" element={<Rewards />} />
       </Route>
     </Routes>
   );
