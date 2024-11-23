@@ -16,15 +16,15 @@ function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [user, setUser] = useState("");
 
-  const dummyData = {
-    name: "MR. DEEPAK SHARMA",
-    occupation: "Software Engineer",
-    bloodGroup: "O+",
-    email: "deepak.sharma@example.com",
-    isRegistered: true,
-  };
+  // const dummyData = {
+  //   name: "MR. DEEPAK SHARMA",
+  //   occupation: "Software Engineer",
+  //   bloodGroup: "O+",
+  //   email: "deepak.sharma@example.com",
+  //   isRegistered: true,
+  // };
 
-  const users = userData || dummyData;
+  // const users = userData || dummyData;
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
 
@@ -92,7 +92,7 @@ function Home() {
       setCurrentSlide((prev) =>
         prev === testimonials.length - 1 ? 0 : prev + 1
       );
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(timer);
   }, [testimonials.length]);
@@ -103,17 +103,17 @@ function Home() {
 
   return (
     <Container>
-      <div className=" mx-auto py-7 ">
+      <div className=" mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
           {/* Morise Card Section */}
-          <div className="bg-white rounded-2xl shadow-lg border  p-4">
+          <div className="rounded-2xl shadow-lg border p-4 w-full mx-auto">
             <div className="relative">
-              <h1 className="text-center text-green-600 font-bold text-2xl mb-4">
+              <h1 className="text-center text-green-600 font-bold text-xl sm:text-2xl mb-4">
                 MORISE CARD
               </h1>
 
-              <div className="flex flex-col md:flex-row items-center gap-6">
-                <div className="w-32 h-32 bg-primary rounded-full flex items-center justify-center">
+              <div className="flex flex-row items-center gap-4 sm:gap-6">
+                <div className="w-32 h-32 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                   <svg
                     className="w-16 h-16 text-gray-200"
                     fill="currentColor"
@@ -123,51 +123,49 @@ function Home() {
                   </svg>
                 </div>
 
-                <div className="flex-1 space-y-2 text-center mx-6 md:text-left">
-                  <p className="font-bold text-lg">{user.fullName}</p>
-                  <p className="text-gray-700 font-semibold">
-                    {/* {users.occupation} */}
+                <div className="flex-1 space-y-1.5 sm:space-y-2 text-left">
+                  <p className="font-bold text-base sm:text-lg">
+                    {user?.fullName || "John Doe"}
                   </p>
-                  <p className="text-gray-700 font-semibold">
-                    BLOOD GROUP:
-                    {/* {users.bloodGroup} */}
+                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                    Software Engineer
                   </p>
-                  <p className="text-gray-700 font-semibold">{user.email}</p>
+                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                    BLOOD GROUP: A+
+                  </p>
+                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                    {user?.email || "john@example.com"}
+                  </p>
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-col md:flex-row justify-between items-center gap-4">
-                <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-blue-800 transition-colors">
+              <div className="mt-4 flex flex-row justify-between items-center gap-4">
+                <button className="bg-primary text-white px-4 sm:px-6 py-2 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
                   {user ? "Profile Status" : "Register Now"}
                 </button>
-
-                <button className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors">
-                  <Eye size={20} />
+                <button className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
+                  <Eye size={18} />
                   VIEW
                 </button>
               </div>
 
-              <p className="text-center text-sm font-medium text-gray-600 mt-4">
+              <p className="text-center text-xs sm:text-sm font-medium text-gray-600 mt-4">
                 A single card that opens doors to your international career.
               </p>
-
-              {/* {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
-                </div>
-              )} */}
-
               {error && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {/* <p className="text-red-500">{error}</p> */}
+                <div className="absolute inset-0 flex items-center justify-center bg-white/50">
+                  <p className="text-red-500 text-sm sm:text-base">
+                    {error || "An error occurred"}
+                  </p>
                 </div>
               )}
             </div>
           </div>
 
-          <div className="p-6 rounded-lg bg-primary">
-            <div className=" text-white p-8 rounded-lg ">
-              <h2 className="text-lg font-medium mb-4">
+          {/* Get Started Section */}
+          <div className="order-2 md:order-none p-6 rounded-lg bg-primary">
+            <div className="text-white p-8 rounded-lg">
+              <h2 className="text-lg font-medium mb-4 md:w-[73%] lg:w-[73%] sm:w-auto m-auto text-center">
                 Upload your documents securely for quick processing / Need
                 Assistance
               </h2>
@@ -181,28 +179,29 @@ function Home() {
               </Link>
             </div>
           </div>
-        </div>
 
-        <div className="max-w-8xl mx-auto  p-4">
-          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
-              <h2 className="text-xl font-semibold text-gray-800">
-                Book Free Consultation
-              </h2>
+          {/* Book a Call Section */}
+          <div className="order-1 md:order-none">
+            <div className="bg-white max-w-screen-lg rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Book Free Consultation
+                </h2>
+              </div>
+
+              <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+                <Phone className="w-5 h-5" />
+                <span className="font-medium">BOOK A CALL</span>
+              </button>
             </div>
-
-            <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
-              <Phone className="w-5 h-5" />
-              <span className="font-medium">BOOK A CALL</span>
-            </button>
           </div>
         </div>
 
         {/* why choose us */}
         <div className="p-4 mt-10 ">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">
+            <h2 class="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
               Why Choose Us?
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -257,7 +256,7 @@ function Home() {
                 <div className="bg-blue-100 p-3 rounded-lg">
                   <CreditCard className="w-6 h-6 text-blue-600" />
                 </div>
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-2xl font-bold text-gray-800">
                   About the Morise Card
                 </h2>
               </div>
@@ -276,7 +275,7 @@ function Home() {
         {/* testimonial */}
         <div className="pt-16 px-4">
           <div className="max-w-6xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            <h2 class="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
               What Our Clients Say
             </h2>
             <p className="text-lg text-gray-600">

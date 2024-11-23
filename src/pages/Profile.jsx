@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-// import Swal from 'sweetalert2/dist/sweetalert2.js';
-// import 'sweetalert2/src/sweetalert2.scss';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 import Container from '../components/Container';
 import Images from '../constants';
 function Profile() {
@@ -51,29 +51,29 @@ function Profile() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // const Toast = Swal.mixin({
-  //   toast: true,
-  //   position: "bottom-end",
-  //   showConfirmButton: false,
-  //   timer: 2000,
-  //   timerProgressBar: true,
-  //   didOpen: (toast) => {
-  //     toast.onmouseenter = Swal.stopTimer;
-  //     toast.onmouseleave = Swal.resumeTimer;
-  //   },
-  // });
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEditing) {
       if (validateForm()) {
         setIsEditing(false)
-        // Swal.fire({
-        //   icon: 'success',
-        //   title: 'Profile updated successfully!',
-        //   showConfirmButton: false,
-        //   timer: 2000,
-        // });
+        Swal.fire({
+          icon: 'success',
+          title: 'Profile updated successfully!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
       }
     } else {
       setIsEditing(true);
@@ -82,10 +82,10 @@ function Profile() {
 
   return (
     <Container>
-    <div className="h-screen bg-[#E9EDC9] flex items-center justify-center">
-     <div className="max-w-3xl bg-white rounded-lg shadow-lg p-6">
+    <div className="h-auto">
+     <div className="max-w-3xl m-auto bg-white rounded-lg shadow-lg p-6 mt-20">
       <div className="flex flex-col items-center mb-6">
-        <div className="relative w-24 h-24">
+        <div className="relative w-28 h-28">
           <img
             src={profileImage || Images.Avatar}
             alt="Profile"
@@ -94,7 +94,7 @@ function Profile() {
         </div>
       </div>
 
-      <form className="space-y-4 min-w-96" onSubmit={handleSubmit}>
+      <form className="space-y-4 p-6 min-w-96" onSubmit={handleSubmit}>
         <div>
           <label className="block text-[#000000] font-semibold">Full Name</label>
           <input
