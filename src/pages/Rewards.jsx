@@ -20,7 +20,7 @@ const Rewards = () => {
               icon={referal.icon}
               memberName={referal.memberName}
               status={referal.status}
-            />
+            /> 
           ))}
         </div>
       </Container>

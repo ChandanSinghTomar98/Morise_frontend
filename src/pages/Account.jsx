@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const Account = () => {
   return (
     <Container>
-      <div className="mx-auto bg-white p-4 md:p-6 min-h-screen">
-        <div className="md:grid md:grid-cols-2 md:gap-8">
+      <div className="mx-auto max-w-[65rem] bg-white p-4 md:p-6">
+        <div className="grid gap-4">
           {/* Left Column */}
-          <div className="mb-8 md:mb-0">
+          <div className=" md:mb-0">
             {/* Header Section */}
             <div className="space-y-4 mb-8">
               <h1 className="text-2xl font-bold">HI, Mr. Demo user</h1>
@@ -49,7 +49,7 @@ const Account = () => {
 
           {/* Right Column */}
           <div className="space-y-4">
-            <div className="hidden md:block h-32"></div>{" "}
+            {/* <div className="hidden md:block h-32"></div>{" "} */}
             {/* Spacer for desktop alignment */}
             <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               RAISE A TICKET
