@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useState,useRef } from "react";
+import html2canvas from "html2canvas"
 import Container from "../components/Container";
-import { Eye } from "lucide-react";
-import { CreditCard, Phone } from "lucide-react";
+import { Download } from "lucide-react";
+import { CreditCard, icons, Phone } from "lucide-react";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -86,6 +86,18 @@ function Home() {
       videoUrl: Images.video3,
     },
   ];
+const cardRef = useRef(null);
+
+  const downloadCard = () => {
+    if (cardRef.current) {
+      html2canvas(cardRef.current).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "MoriseCard.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -106,7 +118,8 @@ function Home() {
       <div className=" mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
           {/* Morise Card Section */}
-          <div className="rounded-2xl shadow-lg border p-4 w-full mx-auto">
+          <div className="rounded-2xl shadow-lg border p-4 w-full mx-auto" ref={cardRef}>
+
             <div className="relative">
               <h1 className="text-center text-green-600 font-bold text-xl sm:text-2xl mb-4">
                 MORISE CARD
@@ -141,11 +154,11 @@ function Home() {
 
               <div className="mt-4 flex flex-row justify-between items-center gap-4">
                 <button className="bg-primary text-white px-4 sm:px-6 py-2 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
-                  {user ? "Profile Status" : "Register Now"}
+                  {user ? (user.status ? "Active":"inactive") : <Link to="/signup" >Register Now</Link> }
                 </button>
-                <button className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
-                  <Eye size={18} />
-                  VIEW
+                <button onClick={()=>downloadCard()} className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
+                  <Download size={18} />
+                  Download
                 </button>
               </div>
 
@@ -297,12 +310,15 @@ function Home() {
                       <div className="relative aspect-video bg-gray-900">
                         <video
                           className="w-full h-full object-cover"
+                          muted
                           autoPlay
                           loop
                           playsInline
+                        
                         >
                           <source src={testimonial.videoUrl} type="video/mp4" />
                           Your browser does not support the video tag.
+                          
                         </video>
                       </div>
                       <div className="p-8 flex flex-col justify-center">
