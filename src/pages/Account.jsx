@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../components/Container";
+import { Link } from "react-router-dom";
 const Account = () => {
   return (
     <Container>
@@ -30,13 +31,19 @@ const Account = () => {
                 GO PREMIUM / PREMIUM PROFILE
               </button>
 
-              <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+              <Link
+                to="/referals"
+                className="block text-center w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+              >
                 MY REFERALS
-              </button>
+              </Link>
 
-              <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+              <Link
+                to="/rewards"
+                className="text-center block w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+              >
                 REWARDS
-              </button>
+              </Link>
             </div>
           </div>
 
