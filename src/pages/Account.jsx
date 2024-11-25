@@ -1,7 +1,13 @@
 import React from "react";
 import Container from "../components/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Account = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate("/");
+  }
   return (
     <Container>
       <div className="mx-auto max-w-[65rem] bg-white p-4 md:p-6">
@@ -62,7 +68,7 @@ const Account = () => {
             </button>
             {/* Back Button - Only visible on desktop for right column */}
             <div className="hidden md:flex justify-center mt-8">
-              <button className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
+              <button onClick={handleGoBack} className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
                 <svg
                   className="w-6 h-6 transform rotate-90"
                   fill="none"
@@ -80,7 +86,8 @@ const Account = () => {
 
           {/* Back Button - Only visible on mobile at the bottom */}
           <div className="md:hidden flex justify-center mt-8">
-            <button className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
+            <button onClick={handleGoBack} className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
+              
               <svg
                 className="w-6 h-6 transform rotate-90"
                 fill="none"

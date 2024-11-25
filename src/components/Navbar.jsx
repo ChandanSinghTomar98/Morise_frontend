@@ -16,6 +16,10 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  const handleProfile=()=>{
+    navigate("/profile")
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -58,6 +62,7 @@ function Navbar() {
                   src={Images.MoriseLogo}
                   alt="Morise"
                   className="w-[12rem] h-[4rem]"
+               
                 />
               </Link>
             </div>
@@ -76,11 +81,11 @@ function Navbar() {
                   src={Images.Avatar}
                   alt="Profile"
                   className="w-14 h-14 rounded-full border border-gray-300 cursor-pointer"
-                  onClick={toggleDropdown}
+                  onClick={handleProfile}
                 />
 
                 {/* Dropdown Menu */}
-                {dropdownOpen && (
+                {/* {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-44 bg-white text-gray-700 rounded-lg shadow-lg z-10">
                     <ul>
                       <li>
@@ -118,7 +123,7 @@ function Navbar() {
                       </li>
                     </ul>
                   </div>
-                )}
+                )} */}
               </div>
 
               {/* Hamburger Menu for Mobile */}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useState,useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import Container from "../components/Container";
 import { Eye } from "lucide-react";
 import { CreditCard, Phone } from "lucide-react";
@@ -15,7 +15,7 @@ function Home() {
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [user, setUser] = useState("");
-
+  const { isAuthenticated, login, logout } = useContext(AuthContext);
   // const dummyData = {
   //   name: "MR. DEEPAK SHARMA",
   //   occupation: "Software Engineer",
@@ -28,27 +28,25 @@ function Home() {
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
 
-  const getUser = async (id, token) => {
-    console.log("id hfhf", id, token);
-    return await getUserById({
-      id: id,
-      token: token,
-    });
-  };
+ 
 
   useEffect(() => {
-    const id = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
+    
 
-    if (id && token) {
-      getUser(id, token)
-        .then((res) => {
-          const data = res.data.data;
-          setUser(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data", error);
-        });
+    try {
+     
+      const getUser = async () => {
+      
+       const result=await getUserById();
+       setUser(result.data.data)
+  
+      };
+      
+      getUser()
+    
+
+    } catch (error) {
+      
     }
   }, []);
 
@@ -141,7 +139,7 @@ function Home() {
 
               <div className="mt-4 flex flex-row justify-between items-center gap-4">
                 <button className="bg-primary text-white px-4 sm:px-6 py-2 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
-                  {user ? "Profile Status" : "Register Now"}
+                  {user?(user?.status ? "Profile active" : "Profile In-active"):(<Link to="/signin">"Registered Now"</Link>)}
                 </button>
                 <button className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
                   <Eye size={18} />
@@ -298,6 +296,7 @@ function Home() {
                         <video
                           className="w-full h-full object-cover"
                           autoPlay
+                          muted
                           loop
                           playsInline
                         >
