@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import Container from "../components/Container";
 import { Link, useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
+import MoriseCard from "../components/MoriseCard";
 
 const Account = () => {
   const navigate = useNavigate();
+  const cardRef = useRef(null);
 
   const handleGoBack = () => {
     navigate("/");
   }
+
+  const downloadCard = () => {
+    navigate("/MoriseCard");
+    if (cardRef.current) {
+      html2canvas(cardRef.current).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "MoriseCard.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  };
   return (
     <Container>
       <div className="mx-auto max-w-[65rem] bg-white p-4 md:p-6">
@@ -63,8 +78,9 @@ const Account = () => {
             <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               OUR CERTIFICATIONS
             </button>
-            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
-              Download Morise Card
+
+            <button onClick={downloadCard} className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+              Download Morise Card 
             </button>
             {/* Back Button - Only visible on desktop for right column */}
             <div className="hidden md:flex justify-center mt-8">

@@ -8,15 +8,12 @@ const UserProfileApiManager = axios.create({
   },
 });
 
-const token=localStorage.getItem("token")
-const id=localStorage.getItem("userId")
-console.log("token",token)
-export const getUserById = () => {
- 
-  return UserProfileApiManager.get(`/get-user-by-id/${id}`, {
+export const getUserById = (data) => {
+  console.log("id hfhf", data);
+  return UserProfileApiManager.get(`/get-user-by-id/${data.id}`, {
     headers: {
-      authorization: `Bearear ${token}`,
-      userid: id,
+      authorization: `Bearer ${data.token}`,
+      userid: data.id,
     },
   });
 };

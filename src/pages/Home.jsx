@@ -1,13 +1,15 @@
-import React, { useEffect, useState,useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import React, { useEffect, useState,useRef ,useContext} from "react";
+import html2canvas from "html2canvas"
 import Container from "../components/Container";
-import { Eye } from "lucide-react";
-import { CreditCard, Phone } from "lucide-react";
+import { Download } from "lucide-react";
+import { CreditCard, icons, Phone } from "lucide-react";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
-
+import {AuthContext} from "../context/AuthContext"
 import { Link, useNavigate } from "react-router-dom";
 import { getUserById } from "../services/UserProfileApiManager";
+import  {getTestimonials} from "../services/TestimonialsApiManager"
 import Images from "../constants/Images";
+import MoriseCard from "../components/MoriseCard";
 
 function Home() {
   const [userData, setUserData] = useState(null);
@@ -16,6 +18,8 @@ function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [user, setUser] = useState("");
   const { isAuthenticated, login, logout } = useContext(AuthContext);
+  const [testimonial,setTestimonialss]=useState([])
+  console.log("dd",testimonial,"length",testimonial.length)
   // const dummyData = {
   //   name: "MR. DEEPAK SHARMA",
   //   occupation: "Software Engineer",
@@ -29,28 +33,54 @@ function Home() {
   console.log("userId", userId);
 
  
+  const getUser = async (id, token) => {
+    console.log("id hfhf", id, token);
+    return await getUserById({
+      id: id,
+      token: token,
+    });
+  };
+
+
+  const getTestimonialses = async (id, token) => {
+   
+    return await getTestimonials({
+      id: id,
+      token: token,
+    });
+  };
 
   useEffect(() => {
-    
+    const id = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
 
-    try {
-     
-      const getUser = async () => {
-      
-       const result=await getUserById();
-       setUser(result.data.data)
-  
-      };
-      
-      getUser()
-    
-
-    } catch (error) {
-      
+    if (id && token) {
+      getUser(id, token)
+        .then((res) => {
+          const data = res.data.data;
+          setUser(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data", error);
+        });
     }
   }, []);
 
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
 
+    if (id && token) {
+      getTestimonialses(id, token)
+        .then((res) => {
+          const data = res.data.data;
+          setTestimonialss(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data", error);
+        });
+    }
+  }, []);
 
   const testimonials = [
     {
@@ -84,16 +114,28 @@ function Home() {
       videoUrl: Images.video3,
     },
   ];
+// const cardRef = useRef(null);
+
+  // const downloadCard = () => {
+  //   if (cardRef.current) {
+  //     html2canvas(cardRef.current).then((canvas) => {
+  //       const link = document.createElement("a");
+  //       link.download = "MoriseCard.png";
+  //       link.href = canvas.toDataURL("image/png");
+  //       link.click();
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) =>
-        prev === testimonials.length - 1 ? 0 : prev + 1
+        prev === testimonial?.length - 1 ? 0 : prev + 1
       );
     }, 4000);
 
     return () => clearInterval(timer);
-  }, [testimonials.length]);
+  }, [testimonial?.length]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -104,14 +146,15 @@ function Home() {
       <div className=" mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
           {/* Morise Card Section */}
-          <div className="rounded-2xl shadow-lg border p-4 w-full mx-auto">
+          {/* <div className="rounded-2xl shadow-lg border sm:px-10 md:px-16 lg:px-16 p-4 w-full mx-auto" ref={cardRef}>
+
             <div className="relative">
               <h1 className="text-center text-green-600 font-bold text-xl sm:text-2xl mb-4">
                 MORISE CARD
               </h1>
 
               <div className="flex flex-row items-center gap-4 sm:gap-6">
-                <div className="w-32 h-32 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-24 h-24 md:w-32 md:h-32 lg:w-32 lg:h-32   bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                   <svg
                     className="w-16 h-16 text-gray-200"
                     fill="currentColor"
@@ -121,7 +164,7 @@ function Home() {
                   </svg>
                 </div>
 
-                <div className="flex-1 space-y-1.5 sm:space-y-2 text-left">
+                <div className="flex-1 space-y-1.5 sm:space-y-2">
                   <p className="font-bold text-base sm:text-lg">
                     {user?.fullName || "John Doe"}
                   </p>
@@ -138,12 +181,12 @@ function Home() {
               </div>
 
               <div className="mt-4 flex flex-row justify-between items-center gap-4">
-                <button className="bg-primary text-white px-4 sm:px-6 py-2 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
-                  {user?(user?.status ? "Profile active" : "Profile In-active"):(<Link to="/signin">"Registered Now"</Link>)}
+                <button className="bg-primary text-white px-4 sm:px-6 py-2 mx-3 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
+                  {user ? (user.status ? "Active":"inactive") : <Link to="/signup" >Register Now</Link> }
                 </button>
-                <button className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
-                  <Eye size={18} />
-                  VIEW
+                <button onClick={()=>downloadCard()} className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
+                  <Download size={18} />
+                  Download
                 </button>
               </div>
 
@@ -158,10 +201,11 @@ function Home() {
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
+          <MoriseCard/>
 
           {/* Get Started Section */}
-          <div className="order-2 md:order-none p-6 rounded-lg bg-primary">
+          <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-primary">
             <div className="text-white p-8 rounded-lg">
               <h2 className="text-lg font-medium mb-4 md:w-[73%] lg:w-[73%] sm:w-auto m-auto text-center">
                 Upload your documents securely for quick processing / Need
@@ -169,7 +213,7 @@ function Home() {
               </h2>
               <Link
                 to="/documents"
-                className="w-full bg-white text-primary md:mt-16 lg:mt-16  hover:bg-gray-200  py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors"
+                className="w-full bg-white text-primary md:mt-20 lg:mt-20  hover:bg-gray-200  py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors"
               >
                 <span className="font-medium">
                   Get Started / Need Assistance
@@ -289,19 +333,22 @@ function Home() {
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
-                {testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="w-full flex-shrink-0">
+                {testimonial?.map((testimonial,index) => (
+                  <div key={index} className="w-full flex-shrink-0">
                     <div className="grid md:grid-cols-2">
                       <div className="relative aspect-video bg-gray-900">
                         <video
                           className="w-full h-full object-cover"
-                          autoPlay
                           muted
+                          autoPlay
                           loop
                           playsInline
+                        
                         >
-                          <source src={testimonial.videoUrl} type="video/mp4" />
+                          <source src={`http://localhost:3001/api/v1${testimonial?.video}`} type="video/mp4" />
+                          {console.log(`http://localhost:3001/api/v1/${testimonial?.video}`)}
                           Your browser does not support the video tag.
+                          {console.log("hgfh",testimonial?.video)}
                         </video>
                       </div>
                       <div className="p-8 flex flex-col justify-center">
@@ -315,15 +362,15 @@ function Home() {
                         </div>
 
                         <blockquote className="text-xl text-gray-600 italic mb-6">
-                          "{testimonial.testimonial}"
+                          "{testimonial?.description}"
                         </blockquote>
 
                         {/* Author Info */}
                         <div>
                           <h3 className="font-bold text-lg text-gray-800">
-                            {testimonial.name}
+                            {testimonial?.name}
                           </h3>
-                          <p className="text-gray-600">{testimonial.role}</p>
+                          <p className="text-gray-600">{testimonial?.designation}</p>
                         </div>
                       </div>
                     </div>
@@ -333,7 +380,7 @@ function Home() {
             </div>
 
             <div className="flex justify-center gap-3 mt-6">
-              {testimonials.map((_, index) => (
+              {testimonial?.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
