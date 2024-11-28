@@ -65,7 +65,7 @@ function Sidebar({ onSupportClick }) {
         <Icon
           size={isActive ? activeSize : baseSize} 
           className={`transition-all duration-200 ${
-            isActive ? "text-white bg-primary rounded-full p-1" : color
+            isActive ? "text-white bg-primary rounded-full p-2" : color
           } ${
             isActive
               ? "sm:w-8 sm:h-8  md:w-10 md:h-10 lg:w-12 lg:h-12" 
