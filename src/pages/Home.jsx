@@ -20,15 +20,7 @@ function Home() {
   const { isAuthenticated, login, logout } = useContext(AuthContext);
   const [testimonial,setTestimonialss]=useState([])
   console.log("dd",testimonial,"length",testimonial.length)
-  // const dummyData = {
-  //   name: "MR. DEEPAK SHARMA",
-  //   occupation: "Software Engineer",
-  //   bloodGroup: "O+",
-  //   email: "deepak.sharma@example.com",
-  //   isRegistered: true,
-  // };
 
-  // const users = userData || dummyData;
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
 
@@ -202,7 +194,7 @@ function Home() {
               )}
             </div>
           </div> */}
-          <MoriseCard/>
+          <MoriseCard isactive={true}/>
 
           {/* Get Started Section */}
           <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-primary">
@@ -343,10 +335,9 @@ function Home() {
                           autoPlay
                           loop
                           playsInline
-                        
                         >
-                          <source src={`http://localhost:3001/api/v1${testimonial?.video}`} type="video/mp4" />
-                          {console.log(`http://localhost:3001/api/v1/${testimonial?.video}`)}
+                        <source src={`http://localhost:3001/uploads/${testimonial?.video}`} type="video/mp4" />
+                          {console.log(`http://localhost:3001/uploads/${testimonial?.video}`)}
                           Your browser does not support the video tag.
                           {console.log("hgfh",testimonial?.video)}
                         </video>

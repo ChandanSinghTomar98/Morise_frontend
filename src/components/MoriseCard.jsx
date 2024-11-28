@@ -1,28 +1,87 @@
 import React, { forwardRef, useRef } from "react";
 import Container from "./Container";
 import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import Button from "./Button";
+const MoriseCard = forwardRef(({ user, isactive }) => {
+  const getBase64ImageFromUrl = async (imageUrl) => {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
 
-const MoriseCard = forwardRef(({ user }, ref) => {
-  const cardRef = useRef(null); 
+  const downloadIdentityCard = async () => {
+    // Create a PDF with slightly larger dimensions (ID card size)
+    const doc = new jsPDF("landscape", "in", [2.5, 3.85]); // Landscape, slightly larger ID card dimensions in inches
+
+    // Add a circular border for the profile picture
+    // Black border
+    // Draw a circle inside the page margins
+
+    // Add a logo or profile picture
+    const logoURL =
+      "https://images.pexels.com/photos/135940/pexels-photo-135940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"; // Example image URL
+    try {
+      const base64Image = await getBase64ImageFromUrl(logoURL);
+      doc.addImage(base64Image, "JPEG", 0.2, 0.9, 1.4, 0.8); // Image (x, y, width, height)
+    } catch (error) {
+      console.error("Error loading image: ", error);
+    }
+
+    // Add user details
+    const userDetails = {
+      fullName: "John Doe",
+      occupation: "Software Engineer",
+      bloodGroup: "O+",
+      email: "johndoe@example.com",
+    };
+
+    // Set fonts for text
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text("Identity Card", 1.5, 0.5); // Title
+
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(`Name: ${userDetails.fullName}`, 1.8, 1.0);
+    doc.text(`Occupation: ${userDetails.occupation}`, 1.8, 1.2);
+    doc.text(`Blood Group: ${userDetails.bloodGroup}`, 1.8, 1.4);
+    doc.text(`Email: ${userDetails.email}`, 1.8, 1.6);
+
+    // Add a footer or custom message
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Powered by Morise", 1.5, 2.4);
+
+    // Save the PDF as an ID card
+    doc.save("IdentityCard.pdf");
+  };
+
+  const cardRef = useRef(null);
 
   // Function to handle downloading the Morise Card
   const downloadCard = () => {
     if (cardRef.current) {
       html2canvas(cardRef.current, {
-        scale: 2, 
-        useCORS: true, 
+        scale: 2,
+        useCORS: true,
       }).then((canvas) => {
         const link = document.createElement("a");
-        link.download = "MoriseCard.png"; 
-        link.href = canvas.toDataURL("image/png"); 
-        link.click(); 
+        link.download = "MoriseCard.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
       });
     }
   };
 
   return (
-   <>
-       <div
+    <>
+      <div
         className="rounded-2xl m-auto max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 p-4 w-full"
         ref={cardRef} // Attach ref to the card container
       >
@@ -70,18 +129,15 @@ const MoriseCard = forwardRef(({ user }, ref) => {
             A single card that opens doors to your international career.
           </p>
         </div>
-         {/* Download Button */}
-      <div className="mt-5 m-auto w-fit">
-        <button
-          onClick={downloadCard} // Attach the download function
-          className="bg-primary m-auto text-white px-4 sm:px-6 py-2 mx-3 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base"
-        >
-          Download Morise Card
-        </button>
-      </div>
+        {/* Download Button */}
       </div>
 
-   </>
+      {isactive ? (
+        <Button hidden={true} handlebutton={downloadIdentityCard} />
+      ) : (
+        <Button hidden={false} handlebutton={downloadIdentityCard} />
+      )}
+    </>
   );
 });
 
