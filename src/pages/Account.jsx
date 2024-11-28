@@ -10,7 +10,7 @@ const Account = () => {
 
   const handleGoBack = () => {
     navigate("/");
-  }
+  };
 
   const downloadCard = () => {
     navigate("/MoriseCard");
@@ -79,12 +79,21 @@ const Account = () => {
               OUR CERTIFICATIONS
             </button>
 
-            <button onClick={downloadCard} className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
-              Download Morise Card 
+            <button
+              onClick={downloadCard}
+              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+            >
+              Download Morise Card
+            </button>
+            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+              Logout
             </button>
             {/* Back Button - Only visible on desktop for right column */}
             <div className="hidden md:flex justify-center mt-8">
-              <button onClick={handleGoBack} className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
+              <button
+                onClick={handleGoBack}
+                className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+              >
                 <svg
                   className="w-6 h-6 transform rotate-90"
                   fill="none"
@@ -102,8 +111,10 @@ const Account = () => {
 
           {/* Back Button - Only visible on mobile at the bottom */}
           <div className="md:hidden flex justify-center mt-8">
-            <button onClick={handleGoBack} className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
-              
+            <button
+              onClick={handleGoBack}
+              className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+            >
               <svg
                 className="w-6 h-6 transform rotate-90"
                 fill="none"
