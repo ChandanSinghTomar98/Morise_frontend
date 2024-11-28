@@ -1,3 +1,3 @@
 export const getBaseURL = () => {
-  return "http://localhost:3001/api/v1";
+  return "http://api.trymorise.com/api/v1";
 };

@@ -1,13 +1,13 @@
-import React, { useEffect, useState,useRef ,useContext} from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import html2canvas from "html2canvas"
 import Container from "../components/Container";
 import { Download } from "lucide-react";
 import { CreditCard, icons, Phone } from "lucide-react";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
-import {AuthContext} from "../context/AuthContext"
+import { AuthContext } from "../context/AuthContext"
 import { Link, useNavigate } from "react-router-dom";
 import { getUserById } from "../services/UserProfileApiManager";
-import  {getTestimonials} from "../services/TestimonialsApiManager"
+import { getTestimonials } from "../services/TestimonialsApiManager"
 import Images from "../constants/Images";
 import MoriseCard from "../components/MoriseCard";
 
@@ -18,13 +18,13 @@ function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [user, setUser] = useState("");
   const { isAuthenticated, login, logout } = useContext(AuthContext);
-  const [testimonial,setTestimonialss]=useState([])
-  console.log("dd",testimonial,"length",testimonial.length)
+  const [testimonial, setTestimonialss] = useState([])
+  console.log("dd", testimonial, "length", testimonial.length)
 
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
 
- 
+
   const getUser = async (id, token) => {
     console.log("id hfhf", id, token);
     return await getUserById({
@@ -35,7 +35,7 @@ function Home() {
 
 
   const getTestimonialses = async (id, token) => {
-   
+
     return await getTestimonials({
       id: id,
       token: token,
@@ -106,7 +106,7 @@ function Home() {
       videoUrl: Images.video3,
     },
   ];
-// const cardRef = useRef(null);
+  // const cardRef = useRef(null);
 
   // const downloadCard = () => {
   //   if (cardRef.current) {
@@ -194,7 +194,7 @@ function Home() {
               )}
             </div>
           </div> */}
-          <MoriseCard isactive={true}/>
+          <MoriseCard isactive={true} />
 
           {/* Get Started Section */}
           <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-primary">
@@ -218,13 +218,13 @@ function Home() {
           <div className="order-1 md:order-none">
             <div className="bg-white max-w-screen-lg rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+                <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
                   Book Free Consultation
                 </h2>
               </div>
 
-              <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+              <button className="w-full sm:w-auto bg-primary hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
                 <span className="font-medium">BOOK A CALL</span>
               </button>
@@ -325,7 +325,7 @@ function Home() {
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
-                {testimonial?.map((testimonial,index) => (
+                {testimonial?.map((testimonial, index) => (
                   <div key={index} className="w-full flex-shrink-0">
                     <div className="grid md:grid-cols-2">
                       <div className="relative aspect-video bg-gray-900">
@@ -336,10 +336,10 @@ function Home() {
                           loop
                           playsInline
                         >
-                        <source src={`http://localhost:3001/uploads/${testimonial?.video}`} type="video/mp4" />
+                          <source src={`http://localhost:3001/uploads/${testimonial?.video}`} type="video/mp4" />
                           {console.log(`http://localhost:3001/uploads/${testimonial?.video}`)}
                           Your browser does not support the video tag.
-                          {console.log("hgfh",testimonial?.video)}
+                          {console.log("hgfh", testimonial?.video)}
                         </video>
                       </div>
                       <div className="p-8 flex flex-col justify-center">
@@ -375,11 +375,10 @@ function Home() {
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    currentSlide === index
-                      ? "bg-blue-600 w-8"
-                      : "bg-gray-300 hover:bg-gray-400"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
+                    ? "bg-blue-600 w-8"
+                    : "bg-gray-300 hover:bg-gray-400"
+                    }`}
                 />
               ))}
             </div>
