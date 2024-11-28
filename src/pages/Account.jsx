@@ -3,14 +3,21 @@ import Container from "../components/Container";
 import { Link, useNavigate } from "react-router-dom";
 import html2canvas from "html2canvas";
 import MoriseCard from "../components/MoriseCard";
-
+import { AuthContext } from "../context/AuthContext";
 const Account = () => {
   const navigate = useNavigate();
   const cardRef = useRef(null);
-
+  const { logout } = React.useContext(AuthContext);
   const handleGoBack = () => {
     navigate("/");
   }
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/signin");
+  };
 
   const downloadCard = () => {
     navigate("/MoriseCard");
@@ -81,6 +88,12 @@ const Account = () => {
 
             <button onClick={downloadCard} className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               Download Morise Card 
+            </button>
+            <button
+              onClick={handleLogout}
+              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+            >
+              Logout
             </button>
             {/* Back Button - Only visible on desktop for right column */}
             <div className="hidden md:flex justify-center mt-8">
