@@ -4,10 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Images from "../constants/Images";
-import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  const { logout } = React.useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -29,13 +27,7 @@ function Navbar() {
     };
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    navigate("/signin");
-    setDropdownOpen(!dropdownOpen);
-  };
+  
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -112,7 +104,6 @@ function Navbar() {
                       </li>
                       <li
                         className="block px-4 py-2 hover:bg-gray-100"
-                        onClick={handleLogout}
                       >
                         Logout
                       </li>

@@ -1,7 +1,19 @@
 import React from "react";
 import Container from "../components/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+
 const Account = () => {
+  const { logout } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/signin");
+  };
+
   return (
     <Container>
       <div className="mx-auto max-w-[65rem] bg-white p-4 md:p-6">
@@ -59,6 +71,12 @@ const Account = () => {
             </button>
             <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               Download Morise Card
+            </button>
+            <button
+              onClick={handleLogout}
+              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+            >
+              Logout
             </button>
             {/* Back Button - Only visible on desktop for right column */}
             <div className="hidden md:flex justify-center mt-8">
