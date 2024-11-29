@@ -113,13 +113,13 @@ function Home() {
           <div className="order-1 md:order-none">
             <div className="bg-white max-w-screen-lg rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+                <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
                   Book Free Consultation
                 </h2>
               </div>
 
-              <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+              <button className="w-full sm:w-auto bg-primary hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
                 <span className="font-medium">BOOK A CALL</span>
               </button>
