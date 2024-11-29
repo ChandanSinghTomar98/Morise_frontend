@@ -12,6 +12,7 @@ import Account from "./pages/Account";
 import Referals from "./pages/Referals";
 import Rewards from "./pages/Rewards";
 import MoriseCard from "./components/MoriseCard";
+import QueryForm from "./components/QueryForm";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="referals" element={<Referals />} />
         <Route path="rewards" element={<Rewards />} />
         <Route path="morisecard" element={<MoriseCard />} />
+        <Route path="queryForm" element={<QueryForm />} />
       </Route>
     </Routes>
   );

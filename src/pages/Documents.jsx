@@ -3,7 +3,6 @@ import { submitDocuments } from "../services/api/DocumentsApiManager";
 import DocumentUploadModal from "../components/DocumentUploadModel";
 import DocumentUploadSuccess from "../components/DocumentUploadSuccess";
 import SignatureCanvas from "../components/SignatureCanvas";
-import { base64ToBlob } from "../utils/Converter";
 const Documents = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);

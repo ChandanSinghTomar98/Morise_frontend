@@ -79,9 +79,9 @@ const Account = () => {
           <div className="space-y-4">
             {/* <div className="hidden md:block h-32"></div>{" "} */}
             {/* Spacer for desktop alignment */}
-            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+            <Link to="/queryForm" className="block text-center w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               RAISE A TICKET
-            </button>
+            </Link>
             {/* <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               OUR CERTIFICATIONS
             </button> */}
