@@ -1,40 +1,43 @@
+import About from "./pages/About";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 export const routes = [
     {
-        auth: true,
+        auth: false,
         role: "user",
         title: "Home",
         Icon: "",
         route: "/",
         component: <Home />,
-        bar: false
+        bar: true
     },
     {
-        auth: true,
+        auth: false,
         role: "user",
         title: "About",
         Icon: "",
-        route: "/",
+        route: "/about-us",
         component: <About />,
+        bar: true
+    },
+    {
+        auth: false,
+        role: "user",
+        title: "Login",
+        Icon: "",
+        route: "/login",
+        component: <Login />,
         bar: false
     },
     {
-        auth: true,
+        auth: false,
         role: "user",
-        title: "Home",
+        title: "SignUp",
         Icon: "",
-        route: "/",
-        component: <Home />,
-        bar: false
-    },
-    {
-        auth: true,
-        role: "user",
-        title: "Home",
-        Icon: "",
-        route: "/",
-        component: <Home />,
+        route: "/sign-up",
+        component: <Signup />,
         bar: false
     },
     {
