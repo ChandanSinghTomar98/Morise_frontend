@@ -2,11 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import Container from "../components/Container";
 import { CreditCard, Phone } from "lucide-react";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
-import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { getUserById } from "../services/UserProfileApiManager";
 import MoriseCard from "../components/MoriseCard";
 import Testimonials from "../components/Testimonials";
+import { AuthContext } from "../context/AuthContext";
+import { TestimonialContext } from "../context/TestimonialContext";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +17,6 @@ function Home() {
   useEffect(() => {
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
-
     const getUser = async (id, token) => {
       console.log("id hfhf", id, token);
       return await getUserById({
@@ -35,55 +35,6 @@ function Home() {
         });
     }
   }, []);
-
-
-
-  // const testimonials = [
-  //   {
-  //     id: 1,
-  //     name: "Sarah Johnson",
-  //     role: "Software Engineer",
-  //     company: "Tech Solutions Inc.",
-  //     rating: 5,
-  //     testimonial:
-  //       "Morise helped me achieve my dream job abroad. The process was smooth and professional.",
-  //     videoUrl: Images.video1,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Michael Chen",
-  //     role: "Data Scientist",
-  //     company: "Data Analytics Pro",
-  //     rating: 5,
-  //     testimonial:
-  //       "Outstanding support throughout my visa application process. Highly recommended!",
-  //     videoUrl: Images.video2,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Emma Williams",
-  //     role: "Product Manager",
-  //     company: "Innovation Hub",
-  //     rating: 5,
-  //     testimonial:
-  //       "The Morise team made my international career transition seamless and stress-free.",
-  //     videoUrl: Images.video3,
-  //   },
-  // ];
-  // const cardRef = useRef(null);
-
-  // const downloadCard = () => {
-  //   if (cardRef.current) {
-  //     html2canvas(cardRef.current).then((canvas) => {
-  //       const link = document.createElement("a");
-  //       link.download = "MoriseCard.png";
-  //       link.href = canvas.toDataURL("image/png");
-  //       link.click();
-  //     });
-  //   }
-  // };
-
-  
 
   return (
     <Container>

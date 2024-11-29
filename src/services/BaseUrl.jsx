@@ -15,7 +15,7 @@ api.interceptors.request.use(
       config.headers["Content-Type"] = "multipart/form-data";
       return config;
     } else {
-      config.headers["Content-Type"] = "multipart/form-data";
+      config.headers["Content-Type"] = "application/json";
       return config;
     }
   },

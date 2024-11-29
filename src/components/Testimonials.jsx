@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { getTestimonials } from "../services/TestimonialsApiManager";
+import React, { useEffect, useState, useContext } from "react";
 import { Star } from "lucide-react";
-
+import { TestimonialContext } from "../context/TestimonialContext";
 const Testimonials = () => {
-  const [testimonial, setTestimonialss] = useState([]);
+  const { testimonials } = useContext(TestimonialContext);
   const [currentSlide, setCurrentSlide] = useState(0);
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      const id = localStorage.getItem("userId");
-      const token = localStorage.getItem("token");
-      if (id && token) {
-        console.log("id", id, "token", token);
-        try {
-          const response = await getTestimonials({
-            id: id,
-            token: token,
-          });
-          setTestimonialss(response.data);
-        } catch (error) {
-          console.error("Error fetching testimonials", error);
-        }
-      }
-    };
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === testimonials?.length - 1 ? 0 : prev + 1
+      );
+    }, 4000);
 
-    fetchTestimonials();
-  }, []);
+    return () => clearInterval(timer);
+  }, [testimonials?.length]);
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -35,7 +23,7 @@ const Testimonials = () => {
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {testimonial?.map((testimonial, index) => (
+          {testimonials?.map((testimonial, index) => (
             <div key={index} className="w-full flex-shrink-0">
               <div className="grid md:grid-cols-2">
                 <div className="relative aspect-video bg-gray-900">
@@ -89,7 +77,7 @@ const Testimonials = () => {
       </div>
 
       <div className="flex justify-center gap-3 mt-6">
-        {testimonial?.map((_, index) => (
+        {testimonials?.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}

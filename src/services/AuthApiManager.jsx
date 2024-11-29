@@ -4,9 +4,5 @@ export const createUser = (data) => {
 };
 
 export const loginUser = (data) => {
-  return api.post("/login", data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return api.post("/login", data);
 };
