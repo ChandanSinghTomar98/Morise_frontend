@@ -67,7 +67,6 @@ const Documents = () => {
       { label: "Aadhar Back", field: "aadharBack" },
       { label: "Pan Card", field: "panFile" },
       { label: "Passport Size Photo", field: "image" },
-      { label: "Signature", field: "sign" },
       { label: "10th Marksheet", field: "matriculation" },
     ];
 
@@ -124,10 +123,8 @@ const Documents = () => {
     const userId = localStorage.getItem("userId");
     if (validateFields()) {
       try {
-        // Create a FormData object to send files
         const formData = new FormData();
         formData.append("qualification", qualification);
-
         // Append all documents
         Object.entries(documents).forEach(([key, file]) => {
           if (file && key !== "additionalOptions") {

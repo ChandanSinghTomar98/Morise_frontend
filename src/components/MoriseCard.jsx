@@ -38,12 +38,12 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
     doc.setFontSize(12);
     doc.text("Identity Card", 1.5, 0.5);
 
-    doc.setFont("Helvetica", "normal");
-    doc.setFontSize(10);
-    doc.text(`Name: ${userDetails.fullName}`, 1.8, 1.0);
-    doc.text(`Occupation: ${userDetails.occupation}`, 1.8, 1.2);
-    doc.text(`Blood Group: ${userDetails.bloodGroup}`, 1.8, 1.4);
-    doc.text(`Email: ${userDetails.email}`, 1.8, 1.6);
+  //   doc.setFont("Helvetica", "normal");
+  //   doc.setFontSize(10);
+  //   doc.text(`Name: ${userDetails.fullName}`, 1.8, 1.0);
+  //   doc.text(`Occupation: ${userDetails.occupation}`, 1.8, 1.2);
+  //   doc.text(`Blood Group: ${userDetails.bloodGroup}`, 1.8, 1.4);
+  //   doc.text(`Email: ${userDetails.email}`, 1.8, 1.6);
 
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
@@ -74,8 +74,8 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
         className="rounded-2xl m-auto max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 p-4 w-full"
         ref={ref || cardRef} // Use the forwarded ref or the local ref
       >
-        <div className="relative">
-          <h1 className="text-center text-green-600 font-bold text-xl sm:text-2xl mb-4">
+        <div className="relative morise-card">
+          <h1 className="text-center text-yellow-600 font-bold text-xl sm:text-2xl mb-4">
             MORISE CARD
           </h1>
 
@@ -112,17 +112,18 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
             </button>
           </div>
 
-          <p className="text-center text-xs sm:text-sm font-medium text-gray-600 mt-4">
+          <p className="text-center text-xs sm:text-sm font-medium text-yellow-600 mt-4">
             A single card that opens doors to your international career.
           </p>
         </div>
       </div>
 
-      {isactive ? (
-        <Button hidden={true} handlebutton={downloadIdentityCard} />
-      ) : (
-        <Button hidden={false} handlebutton={downloadIdentityCard} />
-      )}
+      {//isactive ? (
+        // <Button hidden={true} handlebutton={downloadIdentityCard} />
+        // ) : (
+        // <Button hidden={false} handlebutton={downloadIdentityCard} />
+        // )
+      }
     </>
   );
 });

@@ -8,7 +8,6 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const token = localStorage.getItem("token");
-  console.log(token);
   useEffect(() => {
     if (token) {
       setIsAuthenticated(true);
