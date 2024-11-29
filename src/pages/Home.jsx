@@ -197,7 +197,7 @@ function Home() {
           <MoriseCard isactive={true} />
 
           {/* Get Started Section */}
-          <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-primary">
+          <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-background">
             <div className="text-white p-8 rounded-lg">
               <h2 className="text-lg font-medium mb-4 md:w-[73%] lg:w-[73%] sm:w-auto m-auto text-center">
                 Upload your documents securely for quick processing / Need

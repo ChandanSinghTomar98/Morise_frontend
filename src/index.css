@@ -16,6 +16,11 @@ code {
     monospace;
 }
 
+.relative.morise-card {
+  padding: 12px 35px;
+  position: relative;
+  overflow: hidden;
+}
 .morise-card::before {
   content: "";
   background: url(./assets/images/logo_bottom.png);
