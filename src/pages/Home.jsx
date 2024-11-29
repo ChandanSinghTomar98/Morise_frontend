@@ -14,6 +14,7 @@ import MoriseCard from "../components/MoriseCard";
 import ContactModel from "../components/ContactModel";
 import Testimonials from "../components/Testimonials";
 
+
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -140,9 +141,11 @@ function Home() {
 
           {/* Upload Documents Section */}
           <div
-            className="relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
+            className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
             style={{
               backgroundImage: `url(${Images.NationImg2})`,
+              backgroundPosition: "canter",
+              backgroundAttachment: "fixed",
             }}
           >
             {/* Background Overlay */}
