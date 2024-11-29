@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Images from "../constants";
-import { loginUser } from "../services/AuthApiManager";
+import { loginUser } from "../services/api/AuthApiManager";
 import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
 function Login() {

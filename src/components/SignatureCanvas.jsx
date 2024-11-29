@@ -13,8 +13,6 @@ const SignatureCanvas = ({ onSave }) => {
     console.log("save");
 
     if (!sigCanvas.current.isEmpty()) {
-      console.log("isSigned", isSigned);
-
       const signatureData = sigCanvas.current
         .getTrimmedCanvas()
         .toDataURL("image/png");

@@ -1,4 +1,6 @@
 import api from "./BaseUrl";
+
+
 export const createUser = (data) => {
   return api.post("/register-user", data);
 };

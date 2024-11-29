@@ -48,7 +48,6 @@ const Testimonials = () => {
                 <div className="p-8 flex flex-col justify-center">
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => {
-                      console.log(i);
                       return (
                         <Star
                           key={i}
