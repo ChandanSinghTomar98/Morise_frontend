@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import axios from "axios";
 const api = axios.create({
   baseURL: "http://localhost:3001/api/v1",
@@ -24,8 +23,3 @@ api.interceptors.request.use(
 );
 
 export default api;
-=======
-export const getBaseURL = () => {
-  return "http://api.trymorise.com/api/v1";
-};
->>>>>>> origin/main
