@@ -6,7 +6,7 @@ const About = () => {
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    navigate("/signin")
+    navigate("/signup")
   }
   return (
     <Container>
