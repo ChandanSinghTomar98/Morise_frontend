@@ -5,17 +5,25 @@ const SignatureCanvas = ({ onSave }) => {
   const [isSigned, setIsSigned] = useState(false);
   const clear = () => {
     sigCanvas.current.clear();
-    setIsSigned(false);
+    setIsSigned(true);
     onSave(null);
   };
 
   const save = () => {
+    console.log("save");
+
     if (!sigCanvas.current.isEmpty()) {
-      const signatureData = sigCanvas.current.toDataURL();
+      console.log("isSigned", isSigned);
+
+      const signatureData = sigCanvas.current
+        .getTrimmedCanvas()
+        .toDataURL("image/png");
       onSave(signatureData);
-      setIsSigned(true);
+      setIsSigned(false);
     }
   };
+
+  const [disabled, setIsDisabled] = useState(false);
 
   const handleBegin = () => {
     setIsSigned(true);
@@ -43,7 +51,9 @@ const SignatureCanvas = ({ onSave }) => {
           <button
             type="button"
             onClick={clear}
-            className="px-4 py-1 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className={`px-4 py-1 ${
+              disabled ? "true" : "false"
+            } text-sm text-gray-600 hover:text-gray-800 transition-colors`}
           >
             Clear
           </button>
