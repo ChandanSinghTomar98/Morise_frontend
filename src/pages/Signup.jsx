@@ -134,33 +134,47 @@ function Signup() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const createUserFunction = async (data) => {
+    const response = await createUser(data);
+    if (response.status === 200)
+      Toast.fire({
+        icon: "success",
+        title: "Account created successfully. Please procced to Login",
+      });
+    setTimeout(() => {
+      navigate("/signin");
+    }, 1000);
+  };
+
   // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      createUser(formData)
-        .then((response) => {
-          if (response.status === 200)
-            Toast.fire({
-              icon: "success",
-              title: "Account created successfully. Please procced to Login",
-            });
-        })
-        .then(() => {
-          navigate("/Signin");
-        })
-        .catch((error) => {
-          if (
-            error.response.status === 400 &&
-            error.response.data.message === "User already Exist"
-          ) {
-            Toast.fire({
-              icon: "error",
-              title: "User already exists. Please try with another email.",
-            });
-          }
-          console.log(error);
-        });
+      // console.log(formData);
+      // createUser(formData)
+      //   .then((response) => {
+      //     if (response.status === 200)
+      //       Toast.fire({
+      //         icon: "success",
+      //         title: "Account created successfully. Please procced to Login",
+      //       });
+      //   })
+      //   .then(() => {
+      //     navigate("/signin");
+      //   })
+      //   .catch((error) => {
+      //     if (
+      //       error.response.status === 400 &&
+      //       error.response.data.message === "User already Exist"
+      //     ) {
+      //       Toast.fire({
+      //         icon: "error",
+      //         title: "User already exists. Please try with another email.",
+      //       });
+      //     }
+      //     console.log(error);
+      //   });
+      createUserFunction(formData);
     }
   };
 
