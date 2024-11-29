@@ -1,9 +1,9 @@
 import React, { forwardRef, useRef } from "react";
-import Container from "./Container";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Button from "./Button";
-const MoriseCard = forwardRef(({ user, isactive }) => {
+
+const MoriseCard = forwardRef(({ user, isactive }, ref) => {
   const getBase64ImageFromUrl = async (imageUrl) => {
     const response = await fetch(imageUrl);
     const blob = await response.blob();
@@ -16,24 +16,17 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
   };
 
   const downloadIdentityCard = async () => {
-    // Create a PDF with slightly larger dimensions (ID card size)
-    const doc = new jsPDF("landscape", "in", [2.5, 3.85]); // Landscape, slightly larger ID card dimensions in inches
-
-    // Add a circular border for the profile picture
-    // Black border
-    // Draw a circle inside the page margins
-
-    // Add a logo or profile picture
+    const doc = new jsPDF("landscape", "in", [2.5, 3.85]);
     const logoURL =
-      "https://images.pexels.com/photos/135940/pexels-photo-135940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"; // Example image URL
+      "https://images.pexels.com/photos/135940/pexels-photo-135940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+
     try {
       const base64Image = await getBase64ImageFromUrl(logoURL);
-      doc.addImage(base64Image, "JPEG", 0.2, 0.9, 1.4, 0.8); // Image (x, y, width, height)
+      doc.addImage(base64Image, "JPEG", 0.2, 0.9, 1.4, 0.8);
     } catch (error) {
       console.error("Error loading image: ", error);
     }
 
-    // Add user details
     const userDetails = {
       fullName: "John Doe",
       occupation: "Software Engineer",
@@ -41,10 +34,9 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
       email: "johndoe@example.com",
     };
 
-    // Set fonts for text
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(12);
-    doc.text("Identity Card", 1.5, 0.5); // Title
+    doc.text("Identity Card", 1.5, 0.5);
 
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(10);
@@ -53,18 +45,15 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
     doc.text(`Blood Group: ${userDetails.bloodGroup}`, 1.8, 1.4);
     doc.text(`Email: ${userDetails.email}`, 1.8, 1.6);
 
-    // Add a footer or custom message
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
     doc.text("Powered by Morise", 1.5, 2.4);
 
-    // Save the PDF as an ID card
     doc.save("IdentityCard.pdf");
   };
 
   const cardRef = useRef(null);
 
-  // Function to handle downloading the Morise Card
   const downloadCard = () => {
     if (cardRef.current) {
       html2canvas(cardRef.current, {
@@ -83,7 +72,7 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
     <>
       <div
         className="rounded-2xl m-auto max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 p-4 w-full"
-        ref={cardRef} // Attach ref to the card container
+        ref={ref || cardRef} // Use the forwarded ref or the local ref
       >
         <div className="relative">
           <h1 className="text-center text-green-600 font-bold text-xl sm:text-2xl mb-4">
@@ -91,7 +80,6 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
           </h1>
 
           <div className="flex flex-row items-center gap-4 sm:gap-6">
-            {/* Profile Image Placeholder */}
             <div className="w-24 h-24 md:w-32 md:h-32 lg:w-32 lg:h-32 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
               <svg
                 className="w-16 h-16 text-gray-200"
@@ -102,8 +90,7 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
               </svg>
             </div>
 
-            {/* User Details */}
-            <div className="flex-1 ml-16 sm:ml-9 space-y-1.5 sm:space-y-2">
+            <div className="flex-1 ml-10 md:ml-20 lg:ml-20 space-y-1.5 sm:space-y-2">
               <p className="font-bold text-base sm:text-lg">
                 {user?.fullName || "John Doe"}
               </p>
@@ -120,7 +107,7 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
           </div>
 
           <div className="mt-4 flex flex-row justify-between items-center gap-4">
-            <button className="bg-primary text-white px-4 sm:px-6 py-2 mx-3 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
+            <button className="bg-primary text-white px-4 sm:px-6 py-2  rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
               {user ? (user.status ? "Active" : "Inactive") : "Register Now"}
             </button>
           </div>
@@ -129,7 +116,6 @@ const MoriseCard = forwardRef(({ user, isactive }) => {
             A single card that opens doors to your international career.
           </p>
         </div>
-        {/* Download Button */}
       </div>
 
       {isactive ? (

@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import Container from "../components/Container";
 import Images from "../constants/Images";
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    navigate("/signin")
+  }
   return (
     <Container>
       <div className="bg-white py-5 text-gray-800">
@@ -167,7 +173,7 @@ const About = () => {
               Let Morise guide you on your journey to international career
               success!
             </p>
-            <button className="mt-6 px-6 py-3 bg-white text-[#275791] font-bold text-lg rounded-lg hover:bg-gray-200 transition-all">
+            <button onClick={handleRegister} className="mt-6 px-6 py-3 bg-white text-[#275791] font-bold text-lg rounded-lg hover:bg-gray-200 transition-all">
               Register Now
             </button>
           </div>

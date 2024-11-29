@@ -4,8 +4,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import Container from '../components/Container';
 import Images from '../constants';
+import { getUserById } from "../services/UserProfileApiManager";
 function Profile() {
-
+  const [user, setUser] = useState("");
     const [profileImage, setProfileImage] = useState(null);
   const [fullName, setFullName] = useState('test');
   const [email, setEmail] = useState('abc@gmail.com');
@@ -14,6 +15,8 @@ function Profile() {
   const [referenceId, setReferenceId] = useState('1234');
   const [errors, setErrors] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];

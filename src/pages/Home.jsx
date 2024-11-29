@@ -2,7 +2,8 @@ import React, { useEffect, useState,useRef ,useContext} from "react";
 import html2canvas from "html2canvas"
 import Container from "../components/Container";
 import { Download } from "lucide-react";
-import { CreditCard, icons, Phone } from "lucide-react";
+import { CreditCard, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
 import {AuthContext} from "../context/AuthContext"
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +11,7 @@ import { getUserById } from "../services/UserProfileApiManager";
 import  {getTestimonials} from "../services/TestimonialsApiManager"
 import Images from "../constants/Images";
 import MoriseCard from "../components/MoriseCard";
+import ContactModel from "../components/ContactModel";
 
 function Home() {
   const [userData, setUserData] = useState(null);
@@ -19,12 +21,20 @@ function Home() {
   const [user, setUser] = useState("");
   const { isAuthenticated, login, logout } = useContext(AuthContext);
   const [testimonial,setTestimonialss]=useState([])
-  console.log("dd",testimonial,"length",testimonial.length)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const bookCallBtn = () => {
+    setIsModalOpen(true); 
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); 
+  };
+
+  console.log("dd",testimonial,"length",testimonial.length)
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
 
- 
   const getUser = async (id, token) => {
     console.log("id hfhf", id, token);
     return await getUserById({
@@ -33,9 +43,7 @@ function Home() {
     });
   };
 
-
   const getTestimonialses = async (id, token) => {
-   
     return await getTestimonials({
       id: id,
       token: token,
@@ -137,63 +145,6 @@ function Home() {
     <Container>
       <div className=" mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-          {/* Morise Card Section */}
-          {/* <div className="rounded-2xl shadow-lg border sm:px-10 md:px-16 lg:px-16 p-4 w-full mx-auto" ref={cardRef}>
-
-            <div className="relative">
-              <h1 className="text-center text-green-600 font-bold text-xl sm:text-2xl mb-4">
-                MORISE CARD
-              </h1>
-
-              <div className="flex flex-row items-center gap-4 sm:gap-6">
-                <div className="w-24 h-24 md:w-32 md:h-32 lg:w-32 lg:h-32   bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg
-                    className="w-16 h-16 text-gray-200"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM21 20a9 9 0 1 0-18 0" />
-                  </svg>
-                </div>
-
-                <div className="flex-1 space-y-1.5 sm:space-y-2">
-                  <p className="font-bold text-base sm:text-lg">
-                    {user?.fullName || "John Doe"}
-                  </p>
-                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
-                    Software Engineer
-                  </p>
-                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
-                    BLOOD GROUP: A+
-                  </p>
-                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
-                    {user?.email || "john@example.com"}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex flex-row justify-between items-center gap-4">
-                <button className="bg-primary text-white px-4 sm:px-6 py-2 mx-3 rounded-full hover:bg-blue-800 transition-colors text-sm sm:text-base">
-                  {user ? (user.status ? "Active":"inactive") : <Link to="/signup" >Register Now</Link> }
-                </button>
-                <button onClick={()=>downloadCard()} className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-gray-900 transition-colors text-sm sm:text-base">
-                  <Download size={18} />
-                  Download
-                </button>
-              </div>
-
-              <p className="text-center text-xs sm:text-sm font-medium text-gray-600 mt-4">
-                A single card that opens doors to your international career.
-              </p>
-              {error && (
-                <div className="absolute inset-0 flex items-center justify-center bg-white/50">
-                  <p className="text-red-500 text-sm sm:text-base">
-                    {error || "An error occurred"}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div> */}
           <MoriseCard isactive={true}/>
 
           {/* Get Started Section */}
@@ -216,7 +167,7 @@ function Home() {
 
           {/* Book a Call Section */}
           <div className="order-1 md:order-none">
-            <div className="bg-white max-w-screen-lg rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white max-w-3xl m-auto rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -224,13 +175,36 @@ function Home() {
                 </h2>
               </div>
 
-              <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+             <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
                 <span className="font-medium">BOOK A CALL</span>
               </button>
+    
             </div>
           </div>
+          <ContactModel isOpen={isModalOpen} onClose={closeModal} />
+
+          {/* share button */}
+          <div>
+          <div className="order-1 md:order-none">
+            <div className="bg-white max-w-3xl rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Book Free Consultation
+                </h2>
+              </div>
+
+             <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+                <FaWhatsapp  className="w-6 h-6" />
+                <span className="font-medium">SHARE</span>
+              </button>
+            </div>
+          </div>
+          </div>
         </div>
+
+ 
 
         {/* why choose us */}
         <div className="p-4 mt-10 ">
