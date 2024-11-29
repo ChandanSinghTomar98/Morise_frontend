@@ -56,7 +56,7 @@ const ContactModal = ({ isOpen, onClose }) => {
             </div>
             <div className="flex items-center justify-center space-x-3 text-gray-600 text-sm sm:text-base">
               <Mail className="h-5 w-5" />
-              <span>info@help.com</span>
+              <span>indiahumor73@gmail.com</span>
             </div>
           </div>
 

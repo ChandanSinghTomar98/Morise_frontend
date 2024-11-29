@@ -129,10 +129,10 @@ function Home() {
   return (
     <Container>
       <div className="mx-auto py-5">
-        <div class="marquee">
+        <marquee className="font-bold  text-[#CA8A04] rounded-md tracking-wide ">
           <p> Welcome to Morise – Your trusted partner for global opportunities!</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-4 md:px-24 lg:px-24">
+        </marquee>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-32 lg:px-32">
           {/* Morise Card Section */}
           <div>
             <MoriseCard isactive={true} user={user} />
@@ -140,7 +140,7 @@ function Home() {
 
           {/* Upload Documents Section */}
           <div
-            className="relative max-w-5xl order-2 md:order-none p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
+            className="relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
             style={{
               backgroundImage: `url(${Images.NationImg2})`,
             }}
@@ -149,7 +149,7 @@ function Home() {
             <div className="absolute inset-0 bg-black/60"></div>
             {/* Content */}
             <div className="relative text-white p-6 rounded-lg text-center">
-              <h2 className="text-2xl font-semibold mb-6 leading-relaxed">
+              <h2 className="text-lg md:text-2xl lg:text-2xl font-semibold mb-6 leading-relaxed">
                 Upload your documents securely for quick processing <br /> or
                 get the assistance you need.
               </h2>
@@ -179,7 +179,7 @@ function Home() {
                 className="w-full sm:w-auto bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full shadow-md flex items-center justify-center gap-2 transition-transform duration-300 transform hover:scale-105"
               >
                 <Phone className="w-5 h-5" />
-                <span className="font-medium">BOOK A CALL</span>
+                <span className="font-medium text-sm">BOOK A CALL</span>
               </button>
             </div>
           </div>
@@ -202,7 +202,7 @@ function Home() {
                 className="w-full sm:w-auto bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full shadow-md flex items-center justify-center gap-2 transition-transform duration-300 transform hover:scale-105"
               >
                 <Share2 className="w-5 h-5" />
-                <span className="font-medium">SHARE</span>
+                <span className="font-medium text-sm">SHARE</span>
               </button>
             </div>
           </div>
