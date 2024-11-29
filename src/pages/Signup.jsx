@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Images from "../constants";
 import { Link, useNavigate } from "react-router-dom";
-import { createUser } from "../services/AuthApiManager";
+import { createUser } from "../services/api/AuthApiManager";
 import { Camera } from "lucide-react";
 import { Toast } from "../components/Toast";
 function Signup() {

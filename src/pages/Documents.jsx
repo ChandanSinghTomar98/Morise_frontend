@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { submitDocuments } from "../services/DocumentsApiManager";
+import { submitDocuments } from "../services/api/DocumentsApiManager";
 import DocumentUploadModal from "../components/DocumentUploadModel";
 import DocumentUploadSuccess from "../components/DocumentUploadSuccess";
 import SignatureCanvas from "../components/SignatureCanvas";
-
+import { base64ToBlob } from "../utils/Converter";
 const Documents = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [signature, setSignature] = useState(null);
-
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
   const qualificationLevels = [
     { value: "10th", label: "10th Standard" },
@@ -30,21 +28,28 @@ const Documents = () => {
     postGraduation: null,
     doctoratesCertificate: null,
     other: null,
-    additionalOptions: [],
+    cv: null,
   });
 
   const [errors, setErrors] = useState({});
   const handleSignatureSave = (signatureData) => {
-    console.log("sign", signatureData);
+    // Ensure that signatureData is not empty or undefined
+    if (signatureData) {
+      setDocuments((prev) => ({
+        ...prev,
+        sign: signatureData,
+      }));
 
-    setDocuments((prev) => ({
-      ...prev,
-      sign: signatureData,
-    }));
-    setErrors((prev) => ({
-      ...prev,
-      sign: signatureData ? "" : "Signature is required.",
-    }));
+      setErrors((prev) => ({
+        ...prev,
+        sign: "", // Clear any error when signature is provided
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        sign: "Signature is required.",
+      }));
+    }
   };
   const handleQualificationChange = (e) => {
     const newQualification = e.target.value;
@@ -59,7 +64,6 @@ const Documents = () => {
     }));
     setErrors({});
   };
-
   const getRequiredDocuments = () => {
     // Base documents required for all qualification levels
     const baseDocuments = [
@@ -67,6 +71,7 @@ const Documents = () => {
       { label: "Aadhar Back", field: "aadharBack" },
       { label: "Pan Card", field: "panFile" },
       { label: "Passport Size Photo", field: "image" },
+      { label: "CV", field: "cv" },
       { label: "10th Marksheet", field: "matriculation" },
     ];
 
@@ -125,31 +130,27 @@ const Documents = () => {
       try {
         const formData = new FormData();
         formData.append("qualification", qualification);
-        // Append all documents
         Object.entries(documents).forEach(([key, file]) => {
           if (file && key !== "additionalOptions") {
-            formData.append(key, file);
+            if (key === "sign" && file) {
+              formData.append("sign", file);
+            } else {
+              formData.append(key, file);
+            }
           }
         });
 
-        // Append additional files if any
-        documents.additionalOptions.forEach((file, index) => {
-          formData.append(`additional_${index}`, file);
-        });
         formData.append("userId", userId);
-        //API call
-        submitDocuments(formData)
-          .then((response) => {
-            console.log("response", response);
-          })
-          .then(() => {
-            setIsSuccessDialogOpen(true);
-          })
-          .catch((error) => {
-            console.error("Upload error:", error);
-          });
+
+        // API call to submit the form data
+        const response = await submitDocuments(formData);
+        console.log("Response:", response);
+        if (response.data.status === 200) {
+          setIsSuccessDialogOpen(true);
+        } else {
+          console.log("error uploading documents");
+        }
       } catch (error) {
-        alert("Error submitting documents. Please try again.");
         console.error("Upload error:", error);
       }
     }
@@ -226,29 +227,10 @@ const Documents = () => {
                 )}
               </div>
             ))}
-            <SignatureCanvas onSave={handleSignatureSave} />
+            <SignatureCanvas onSave={(data) => handleSignatureSave(data)} />
             {errors.sign && (
               <p className="text-sm text-red-500 mt-1">{errors.sign}</p>
             )}
-
-            {/* Additional Options */}
-            <div className="space-y-2">
-              <label className="block font-semibold text-[#000000]">
-                Additional Documents (Optional)
-              </label>
-              <input
-                type="file"
-                onChange={(e) =>
-                  setDocuments((prev) => ({
-                    ...prev,
-                    additionalOptions: [...e.target.files],
-                  }))
-                }
-                multiple
-                className="block w-full px-4 py-2 border rounded-lg focus:outline-none border-gray-300 focus:border-[#DBB000]"
-                accept="image/*,.pdf"
-              />
-            </div>
 
             {/* Submit Button */}
             <button

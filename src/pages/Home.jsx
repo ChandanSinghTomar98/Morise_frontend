@@ -5,12 +5,11 @@ import { CreditCard, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getUserById } from "../services/UserProfileApiManager";
+import { getUserById } from "../services/api/UserProfileApiManager";
 import MoriseCard from "../components/MoriseCard";
 import ContactModel from "../components/ContactModel";
 import Testimonials from "../components/Testimonials";
 import { AuthContext } from "../context/AuthContext";
-import { TestimonialContext } from "../context/TestimonialContext";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
