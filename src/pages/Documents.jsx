@@ -28,13 +28,11 @@ const Documents = () => {
     postGraduation: null,
     doctoratesCertificate: null,
     other: null,
-    additionalOptions: [],
+    cv: null,
   });
 
   const [errors, setErrors] = useState({});
   const handleSignatureSave = (signatureData) => {
-    console.log("signatureData", signatureData);
-
     // Ensure that signatureData is not empty or undefined
     if (signatureData) {
       setDocuments((prev) => ({
@@ -73,6 +71,7 @@ const Documents = () => {
       { label: "Aadhar Back", field: "aadharBack" },
       { label: "Pan Card", field: "panFile" },
       { label: "Passport Size Photo", field: "image" },
+      { label: "CV", field: "cv" },
       { label: "10th Marksheet", field: "matriculation" },
     ];
 
@@ -141,11 +140,6 @@ const Documents = () => {
           }
         });
 
-        // Append additional files if any
-        documents.additionalOptions.forEach((file, index) => {
-          formData.append(`additional_${index}`, file);
-        });
-
         formData.append("userId", userId);
 
         // API call to submit the form data
@@ -154,10 +148,9 @@ const Documents = () => {
         if (response.data.status === 200) {
           setIsSuccessDialogOpen(true);
         } else {
-          alert("Error submitting documents. Please try again.");
+          console.log("error uploading documents");
         }
       } catch (error) {
-        alert("Error submitting documents. Please try again.");
         console.error("Upload error:", error);
       }
     }
@@ -238,25 +231,6 @@ const Documents = () => {
             {errors.sign && (
               <p className="text-sm text-red-500 mt-1">{errors.sign}</p>
             )}
-
-            {/* Additional Options */}
-            <div className="space-y-2">
-              <label className="block font-semibold text-[#000000]">
-                Additional Documents (Optional)
-              </label>
-              <input
-                type="file"
-                onChange={(e) =>
-                  setDocuments((prev) => ({
-                    ...prev,
-                    additionalOptions: [...e.target.files],
-                  }))
-                }
-                multiple
-                className="block w-full px-4 py-2 border rounded-lg focus:outline-none border-gray-300 focus:border-[#DBB000]"
-                accept="image/*,.pdf"
-              />
-            </div>
 
             {/* Submit Button */}
             <button

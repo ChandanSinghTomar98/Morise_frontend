@@ -10,7 +10,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
           <div className="flex items-center space-x-4">
             <span>© 2024 Morise</span>
-            <div className="flex space-x-3">
+            <div className=" hidden space-x-3">
               <a href="#" className="hover:text-gray-600">
                 <FaLinkedin />
               </a>

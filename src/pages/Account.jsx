@@ -82,9 +82,9 @@ const Account = () => {
             <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               RAISE A TICKET
             </button>
-            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+            {/* <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               OUR CERTIFICATIONS
-            </button>
+            </button> */}
 
             <button
               onClick={downloadCard}
