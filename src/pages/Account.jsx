@@ -55,20 +55,20 @@ const Account = () => {
 
             {/* First Set of Navigation Buttons */}
             <div className="space-y-4">
-              <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+              <button className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
                 GO PREMIUM / PREMIUM PROFILE
               </button>
 
               <Link
                 to="/referals"
-                className="block text-center w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+                className="block text-center w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
               >
                 MY REFERALS
               </Link>
 
               <Link
                 to="/rewards"
-                className="text-center block w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+                className="text-center block w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
               >
                 REWARDS
               </Link>
@@ -79,25 +79,25 @@ const Account = () => {
           <div className="space-y-4">
             {/* <div className="hidden md:block h-32"></div>{" "} */}
             {/* Spacer for desktop alignment */}
-            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+            <button className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               RAISE A TICKET
             </button>
-            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+            <button className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               OUR CERTIFICATIONS
             </button>
 
             <button
               onClick={downloadCard}
-              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+              className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
             >
               Download Morise Card
             </button>
-            <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+            <button className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
               Logout
             </button>
             <button
               onClick={handleLogout}
-              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+              className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
             >
               Logout
             </button>
@@ -105,7 +105,7 @@ const Account = () => {
             <div className="hidden md:flex justify-center mt-8">
               <button
                 onClick={handleGoBack}
-                className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+                className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"
               >
                 <svg
                   className="w-6 h-6 transform rotate-90"
@@ -126,7 +126,7 @@ const Account = () => {
           <div className="md:hidden flex justify-center mt-8">
             <button
               onClick={handleGoBack}
-              className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+              className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"
             >
               <svg
                 className="w-6 h-6 transform rotate-90"
