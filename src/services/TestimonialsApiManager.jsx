@@ -1,22 +1,11 @@
-import axios from "axios";
-import { getBaseURL } from "./BaseUrl";
+import api from "./BaseUrl";
 
-const TestimonialsApiManager = axios.create({
-    baseURL: getBaseURL(),
-    headers: {
-      "Content-type": "multipart/form-data",
-    },
-  });
-
-
-  export const getTestimonials = (data) => {
-    return TestimonialsApiManager.get("/get-all-testimonials", data, {
-        headers: {
-            authorization: `Bearer ${data.token}`,
-            userid: data.id,
-          },
-    });
-  };
-
- 
-  
+export const getTestimonials = async (data) => {
+  try {
+    const response = await api.get("/get-all-testimonials?page=0", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching testimonials:", error);
+    throw error;
+  }
+};
