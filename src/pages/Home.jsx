@@ -143,8 +143,8 @@ function Home() {
           <div
             className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
             style={{
-              backgroundImage: `url(${Images.NationImg2})`,
-              backgroundPosition: "canter",
+              backgroundImage: `url(${Images.BgImg3})`,
+              backgroundPosition: "top",
               backgroundAttachment: "fixed",
             }}
           >

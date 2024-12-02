@@ -75,7 +75,7 @@ const Rewards = () => {
       <div className="m-auto w-fit justify-center mt-4">
               <button
                 onClick={handleGoBack}
-                className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+                className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"
               >
                 <svg
                   className="w-6 h-6 transform rotate-90"

@@ -79,7 +79,7 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
 
   return (
     <>
-      <div className=" mx-auto rounded-2xl p-4 md:p-6 lg:p-6 bg-white shadow-xl border border-gray-200">
+      <div className="max-w-3xl mx-auto rounded-2xl p-4 md:p-6 lg:p-6 bg-white shadow-xl border border-gray-200">
         <div className="relative morise-card">
           <h1 className="text-center text-yellow-600 font-bold text-2xl mb-4">
             MORISE CARD
