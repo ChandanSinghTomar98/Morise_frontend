@@ -46,14 +46,14 @@ function Navbar() {
               : "bg-[#111827]"
           }`}
         >
-          <div className=" mx-16 flex items-center justify-between">
+          <div className="mx-4 md:mx-14 lg:mx-14 flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center py-4 space-x-2">
               <Link to="/">
                 <img
                   src={Images.MoriseLogo}
                   alt="Morise"
-                  className="w-[12rem] h-[4rem]"
+                  className="w-[8rem] md:w-[12rem] lg:w-[12rem]"
                
                 />
               </Link>
@@ -72,7 +72,7 @@ function Navbar() {
                 <img
                   src={Images.Avatar}
                   alt="Profile"
-                  className="w-14 h-14 rounded-full border border-gray-300 cursor-pointer"
+                  className="w-12 h-12 md:h-14 md:w-14 lg:w-14 lg:h-14 rounded-full border border-gray-300 cursor-pointer"
                   onClick={handleProfile}
                 />
 

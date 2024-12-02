@@ -46,7 +46,7 @@ function Sidebar({ onSupportClick }) {
   const renderNavItem = ({ path, icon: Icon, color, onClick, size }) => {
     const isActive = path && location.pathname === path;
     const baseSize = size || 32;
-    const activeSize = size ? size + 10 : 32;
+    const activeSize = size ? size + 10 : 38;
 
     const CommonContent = (
       // <>

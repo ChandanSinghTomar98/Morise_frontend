@@ -35,11 +35,11 @@ const Testimonials = () => {
                     playsInline
                   >
                     <source
-                      src={`http://localhost:3001/api/v1${testimonial?.video}`}
+                      src={`http://localhost:3001/video/${testimonial?.video}`}
                       type="video/mp4"
                     />
                     {console.log(
-                      `http://localhost:3001/api/v1/${testimonial?.video}`
+                      `http://localhost:3001/video/${testimonial?.video}`
                     )}
                     Your browser does not support the video tag.
                     {console.log("hgfh", testimonial?.video)}

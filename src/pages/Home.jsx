@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import Container from "../components/Container";
+import { Download } from "lucide-react";
 import { CreditCard, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getUserById } from "../services/api/UserProfileApiManager";
 import MoriseCard from "../components/MoriseCard";
+import ContactModel from "../components/ContactModel";
 import Testimonials from "../components/Testimonials";
 import { AuthContext } from "../context/AuthContext";
 
@@ -13,6 +16,36 @@ function Home() {
   const [error, setError] = useState(null);
   const [user, setUser] = useState("");
   const { isAuthenticated, login, logout } = useContext(AuthContext);
+  const [testimonial,setTestimonialss]=useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const bookCallBtn = () => {
+    setIsModalOpen(true); 
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); 
+  };
+
+  console.log("dd",testimonial,"length",testimonial.length)
+  const userId = localStorage.getItem("userId");
+  console.log("userId", userId);
+
+  const getUser = async (id, token) => {
+    console.log("id hfhf", id, token);
+    return await getUserById({
+      id: id,
+      token: token,
+    });
+  };
+
+  // const getTestimonialses = async (id, token) => {
+  //   return await getTestimonials({
+  //     id: id,
+  //     token: token,
+  //   });
+  // };
+
   useEffect(() => {
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
@@ -39,7 +72,7 @@ function Home() {
     <Container>
       <div className=" mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-          <MoriseCard />
+          <MoriseCard isactive={true}/>
 
           {/* Get Started Section */}
           <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-background">
@@ -61,7 +94,7 @@ function Home() {
 
           {/* Book a Call Section */}
           <div className="order-1 md:order-none">
-            <div className="bg-white max-w-screen-lg rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white max-w-3xl m-auto rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -69,13 +102,36 @@ function Home() {
                 </h2>
               </div>
 
-              <button className="w-full sm:w-auto bg-primary hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+             <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
                 <span className="font-medium">BOOK A CALL</span>
               </button>
+    
             </div>
           </div>
+          <ContactModel isOpen={isModalOpen} onClose={closeModal} />
+
+          {/* share button */}
+          <div>
+          <div className="order-1 md:order-none">
+            <div className="bg-white max-w-3xl rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Book Free Consultation
+                </h2>
+              </div>
+
+             <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+                <FaWhatsapp  className="w-6 h-6" />
+                <span className="font-medium">SHARE</span>
+              </button>
+            </div>
+          </div>
+          </div>
         </div>
+
+ 
 
         {/* why choose us */}
         <div className="p-4 mt-10 ">
