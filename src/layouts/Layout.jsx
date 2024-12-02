@@ -1,30 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
-import Cookies from "js-cookie";
-import { AuthContext } from "../context/AuthContext";
 import ContactModel from "../components/ContactModel";
+import { AuthContext } from "../context/AuthContext";
 
 function Layout() {
-  const { isAuthenticated, login, logout } = useContext(AuthContext);
-  const [userToken, setUserToken] = useState("");
-  const username = Cookies.get("authToken");
+  const location = useLocation();
+  const { isAuthenticated } = useContext(AuthContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  // Define routes where Navbar, Sidebar, and Footer should not appear
+  const hideOnRoutes = ["/signin", "/signup"];
+  const shouldHideLayout = hideOnRoutes.includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="mb-3">{isAuthenticated ? <Navbar /> : null}</div>
+      {/* Navbar */}
+      {!shouldHideLayout && <Navbar />}
 
       {/* Main content wrapper */}
       <div className="flex-grow flex flex-col">
-        {isAuthenticated ? (
+        {!shouldHideLayout ? (
           <div className="flex justify-between flex-grow">
             {/* Sidebar */}
             <div className="w-[2%] text-white">
@@ -46,7 +44,7 @@ function Layout() {
       </div>
 
       {/* Footer */}
-      {isAuthenticated ? <Footer /> : null}
+      {!shouldHideLayout && <Footer />}
 
       {/* Contact Modal */}
       <ContactModel

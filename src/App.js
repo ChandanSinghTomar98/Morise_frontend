@@ -1,37 +1,26 @@
-import { Routes, Route } from "react-router-dom";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { routes } from "./routes";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 import Layout from "./layouts/Layout";
-import About from "./pages/About";
-import Profile from "./pages/Profile";
-import Certificate from "./pages/Certificate";
-import Achievements from "./pages/Achievements";
-import Documents from "./pages/Documents";
-import Account from "./pages/Account";
-import Referals from "./pages/Referals";
-import Rewards from "./pages/Rewards";
-import MoriseCard from "./components/MoriseCard";
-import QueryForm from "./components/QueryForm";
-
 function App() {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* Nested Routes */}
-        <Route index element={<Home />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="about" element={<About />} />
-        <Route path="signin" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="achievement" element={<Achievements />} />
-        <Route path="certificate" element={<Certificate />} />
-        <Route path="documents" element={<Documents />} />
-        <Route path="account" element={<Account />} />
-        <Route path="referals" element={<Referals />} />
-        <Route path="rewards" element={<Rewards />} />
-        <Route path="morisecard" element={<MoriseCard />} />
-        <Route path="queryForm" element={<QueryForm />} />
+        {routes.map(({ auth, route, component }, index) => {
+          if (auth && !isAuthenticated) {
+            return (
+              <Route
+                key={index}
+                path={route}
+                element={<Navigate to="/signin" />}
+              />
+            );
+          }
+          return <Route key={index} path={route} element={component} />;
+        })}
       </Route>
     </Routes>
   );
