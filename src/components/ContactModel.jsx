@@ -52,11 +52,11 @@ const ContactModal = ({ isOpen, onClose }) => {
           <div className="space-y-4 mb-6">
             <div className="flex items-center justify-center space-x-3 text-gray-600 text-sm sm:text-base">
               <PhoneCall className="h-5 w-5" />
-              <span>+91 1234567890</span>
+              <span>+91 9541299224</span>
             </div>
             <div className="flex items-center justify-center space-x-3 text-gray-600 text-sm sm:text-base">
               <Mail className="h-5 w-5" />
-              <span>info@help.com</span>
+              <span>indiahumor73@gmail.com</span>
             </div>
           </div>
 

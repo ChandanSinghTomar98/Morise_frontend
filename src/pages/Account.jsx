@@ -1,13 +1,51 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import Container from "../components/Container";
 import { Link, useNavigate } from "react-router-dom";
 import html2canvas from "html2canvas";
 import MoriseCard from "../components/MoriseCard";
 import { AuthContext } from "../context/AuthContext";
+import { getUserById } from "../services/api/UserProfileApiManager";
+
 const Account = () => {
   const navigate = useNavigate();
   const cardRef = useRef(null);
-  const { logout } = React.useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+
+  // State to store user data
+  const [user, setUser] = useState({
+    name: "",
+    profileStatus: "",
+    initial: "",
+  });
+
+  useEffect(() => {
+    // Fetch user data when the component loads
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+
+      if (token && userId) {
+        try {
+          const response = await getUserById({ id: userId, token });
+          console.log("User Data:", response.data); // Debugging
+          setUser({
+            name: response?.data?.data?.name,
+            profileStatus: response?.data?.data?.status,
+            initial: response?.data?.data?.initial,
+          });
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          // Redirect to login if unauthorized
+          if (error.response && error.response.status === 401) {
+            handleLogout();
+          }
+        }
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   const handleGoBack = () => {
     navigate("/");
   };
@@ -30,6 +68,7 @@ const Account = () => {
       });
     }
   };
+
   return (
     <Container>
       <div className="mx-auto max-w-[65rem] bg-white p-4 md:p-6">
@@ -38,7 +77,9 @@ const Account = () => {
           <div className=" md:mb-0">
             {/* Header Section */}
             <div className="space-y-4 mb-8">
-              <h1 className="text-2xl font-bold">HI, Mr. Demo user</h1>
+              <h1 className="text-2xl font-bold">
+                Hi  ,{user?.initial} {user?.name}
+              </h1>
               <p className="text-blue-700 font-medium md:pr-8">
                 The Morise Card is your ultimate career companion. Register now
                 and let us handle everything - from documentation to visa
@@ -50,25 +91,31 @@ const Account = () => {
             {/* Profile Status */}
             <div className="bg-yellow-300 rounded-lg p-4 mb-4 flex justify-between items-center">
               <span className="font-medium">Profile Status</span>
-              <span className="font-medium">Approved/Pending</span>
+              <span
+                className={`font-medium ${
+                  user?.profileStatus ? "text-green-500" : "text-red-600" 
+                }`}
+              >
+                {user?.profileStatus ? "Active" : "Inactive"}
+              </span>
             </div>
 
             {/* First Set of Navigation Buttons */}
             <div className="space-y-4">
-              <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+              <button className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
                 GO PREMIUM / PREMIUM PROFILE
               </button>
 
               <Link
                 to="/referals"
-                className="block text-center w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+                className="block text-center w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
               >
                 MY REFERALS
               </Link>
 
               <Link
                 to="/rewards"
-                className="text-center block w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+                className="text-center block w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
               >
                 REWARDS
               </Link>
@@ -88,22 +135,23 @@ const Account = () => {
 
             <button
               onClick={downloadCard}
-              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+              className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
             >
               Download Morise Card
             </button>
 
             <button
               onClick={handleLogout}
-              className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+              className="w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
             >
               Logout
             </button>
+
             {/* Back Button - Only visible on desktop for right column */}
             <div className="hidden md:flex justify-center mt-8">
               <button
                 onClick={handleGoBack}
-                className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+                className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"
               >
                 <svg
                   className="w-6 h-6 transform rotate-90"
@@ -124,7 +172,7 @@ const Account = () => {
           <div className="md:hidden flex justify-center mt-8">
             <button
               onClick={handleGoBack}
-              className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+              className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"
             >
               <svg
                 className="w-6 h-6 transform rotate-90"

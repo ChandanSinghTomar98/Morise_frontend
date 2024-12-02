@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import html2canvas from "html2canvas";
 import Container from "../components/Container";
 import { Download } from "lucide-react";
-import { CreditCard, Phone } from "lucide-react";
+import { CreditCard, Phone, Share2 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -18,16 +19,37 @@ function Home() {
   const { isAuthenticated, login, logout } = useContext(AuthContext);
   const [testimonial,setTestimonialss]=useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   const bookCallBtn = () => {
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
   };
 
-  console.log("dd",testimonial,"length",testimonial.length)
+  const openModal = () => setIsModalOpen(true);
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Check out our services",
+          text: "Book a free consultation!",
+          url: window.location.href,
+        })
+        .catch(console.error);
+    } else {
+      // Fallback for browsers that don't support Web Share API
+      alert("Sharing not supported. Please copy the link manually.");
+    }
+  };
+
+  console.log("dd", testimonial, "length", testimonial.length);
   const userId = localStorage.getItem("userId");
   console.log("userId", userId);
 
@@ -74,28 +96,37 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
           <MoriseCard isactive={true}/>
 
-          {/* Get Started Section */}
-          <div className="order-2 md:order-none p-6 rounded-lg max-w-3xl mt-5 shadow-lg border sm:px-10 md:px-16 lg:px-16 bg-background">
-            <div className="text-white p-8 rounded-lg">
-              <h2 className="text-lg font-medium mb-4 md:w-[73%] lg:w-[73%] sm:w-auto m-auto text-center">
-                Upload your documents securely for quick processing / Need
-                Assistance
+          {/* Upload Documents Section */}
+          <div
+            className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
+            style={{
+              // backgroundImage: `url(${Images.BgImg3})`,
+              backgroundPosition: "top",
+              backgroundAttachment: "fixed",
+            }}
+          >
+            {/* Background Overlay */}
+            <div className="absolute inset-0 bg-black/60"></div>
+            {/* Content */}
+            <div className="relative text-white p-6 rounded-lg text-center">
+              <h2 className="text-lg md:text-2xl lg:text-2xl font-semibold mb-6 leading-relaxed">
+                Upload your documents securely for quick processing <br /> or
+                get the assistance you need.
               </h2>
               <Link
                 to="/documents"
-                className="w-full bg-white text-primary md:mt-20 lg:mt-20  hover:bg-gray-200  py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-colors"
+                className="inline-block bg-primary text-white hover:bg-blu-500  py-3 px-8 rounded-full font-medium shadow-md transition-transform duration-300 transform hover:scale-105"
               >
-                <span className="font-medium">
-                  Get Started / Need Assistance
-                </span>
+                Get Started
               </Link>
             </div>
           </div>
 
           {/* Book a Call Section */}
           <div className="order-1 md:order-none">
-            <div className="bg-white max-w-3xl m-auto rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
+            <div className="bg-white mx-auto rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-center justify-between gap-6">
+              {/* Content */}
+              <div className="flex items-center gap-4">
                 <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
                   Book Free Consultation
@@ -104,34 +135,34 @@ function Home() {
 
              <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
-                <span className="font-medium">BOOK A CALL</span>
+                <span className="font-medium text-sm">BOOK A CALL</span>
               </button>
-    
             </div>
           </div>
           <ContactModel isOpen={isModalOpen} onClose={closeModal} />
 
-          {/* share button */}
+          {/* Share Services Section */}
           <div>
-          <div className="order-1 md:order-none">
-            <div className="bg-white max-w-3xl rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-12 rounded-full bg-green-600 hidden sm:block"></div>
+            <div className="bg-white mx-auto rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-center justify-between gap-6">
+              {/* Content */}
+              <div className="flex items-center gap-4">
+                <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
-                  Book Free Consultation
+                  Share Our Services
                 </h2>
               </div>
 
-             <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
-                <FaWhatsapp  className="w-6 h-6" />
-                <span className="font-medium">SHARE</span>
+              {/* Button */}
+              <button
+                onClick={handleShare}
+                className="w-full sm:w-auto bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full shadow-md flex items-center justify-center gap-2 transition-transform duration-300 transform hover:scale-105"
+              >
+                <Share2 className="w-5 h-5" />
+                <span className="font-medium text-sm">SHARE</span>
               </button>
             </div>
           </div>
-          </div>
         </div>
-
- 
 
         {/* why choose us */}
         <div className="p-4 mt-10 ">
@@ -220,7 +251,78 @@ function Home() {
           </div>
 
           {/* Carousel Container */}
-          <Testimonials />
+          <div className=" relative">
+            <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {testimonial?.map((testimonial, index) => (
+                  <div key={index} className="w-full flex-shrink-0">
+                    <div className="grid md:grid-cols-2">
+                      <div className="relative aspect-video bg-gray-900">
+                        <video
+                          className="w-full h-full object-cover"
+                          muted
+                          autoPlay
+                          loop
+                          playsInline
+                        >
+                          <source
+                            src={`http://localhost:3001/uploads/${testimonial?.video}`}
+                            type="video/mp4"
+                          />
+                          {console.log(
+                            `http://localhost:3001/uploads/${testimonial?.video}`
+                          )}
+                          Your browser does not support the video tag.
+                          {console.log("hgfh", testimonial?.video)}
+                        </video>
+                      </div>
+                      <div className="p-8 flex flex-col justify-center">
+                        <div className="flex gap-1 mb-4">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className="w-5 h-5 text-yellow-400 fill-current"
+                            />
+                          ))}
+                        </div>
+
+                        <blockquote className="text-xl text-gray-600 italic mb-6">
+                          "{testimonial?.description}"
+                        </blockquote>
+
+                        {/* Author Info */}
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-800">
+                            {testimonial?.name}
+                          </h3>
+                          <p className="text-gray-600">
+                            {testimonial?.designation}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-center gap-3 mt-6">
+              {testimonial?.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    currentSlide === index
+                      ? "bg-blue-600 w-8"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </Container>

@@ -7,6 +7,9 @@ import BGimage from "../assets/images/bg_img.avif"
 import NationImg from "../assets/images/nation_bg.jpg"
 import NationImg2 from "../assets/images/nation_bg2.jpg"
 import TrophyImg from "../assets/images/trophy.png"
+import BgImg1 from "../assets/images/background1.jpg"
+import BgImg2 from "../assets/images/background2.jpg"
+import BgImg3 from "../assets/images/background3.jpg"
 
 // videos
 import video1 from "../assets/images/video1.mp4"
@@ -20,4 +23,5 @@ import card1 from "../assets/images/card1.jpg"
 import card2 from "../assets/images/card2.jpg"
 import card3 from "../assets/images/card3.jpg"
 
-export default { BackgroundImage,FooterLogo,carousel1,carousel2,carousel3, MoriseLogo, card1, card2, card3,Avatar,CardBg,BGimage,video1, video2, video3, NationImg, NationImg2, TrophyImg } 
+export default { BackgroundImage,FooterLogo,carousel1,carousel2,carousel3, MoriseLogo, card1, card2, card3,Avatar,CardBg,BGimage,video1, video2, video3, 
+    NationImg, NationImg2, TrophyImg , BgImg1, BgImg2, BgImg3 } 

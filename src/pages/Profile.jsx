@@ -86,7 +86,7 @@ function Profile() {
   return (
     <Container>
     <div className="h-auto">
-     <div className="max-w-3xl m-auto bg-white rounded-lg shadow-lg p-6 mt-20">
+     <div className="max-w-3xl m-auto bg-white rounded-lg shadow-lg p-6">
       <div className="flex flex-col items-center mb-6">
         <div className="relative w-28 h-28">
           <img
