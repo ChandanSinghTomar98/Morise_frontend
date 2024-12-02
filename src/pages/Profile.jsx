@@ -4,7 +4,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import Container from '../components/Container';
 import Images from '../constants';
-import { getUserById } from "../services/UserProfileApiManager";
+import { getUserById } from "../services/api/UserProfileApiManager";
 function Profile() {
   const [user, setUser] = useState("");
     const [profileImage, setProfileImage] = useState(null);
