@@ -17,7 +17,7 @@ function Home() {
   const [error, setError] = useState(null);
   const [user, setUser] = useState("");
   const { isAuthenticated, login, logout } = useContext(AuthContext);
-  const [testimonial,setTestimonialss]=useState([])
+  const [testimonial, setTestimonialss] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -94,7 +94,7 @@ function Home() {
     <Container>
       <div className=" mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-          <MoriseCard isactive={true}/>
+          <MoriseCard isactive={true} />
 
           {/* Upload Documents Section */}
           <div
@@ -133,7 +133,10 @@ function Home() {
                 </h2>
               </div>
 
-             <button onClick={bookCallBtn} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2">
+              <button
+                onClick={bookCallBtn}
+                className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2"
+              >
                 <Phone className="w-5 h-5" />
                 <span className="font-medium text-sm">BOOK A CALL</span>
               </button>
@@ -249,7 +252,7 @@ function Home() {
               with Morise
             </p>
           </div>
-
+          <Testimonials />
           {/* Carousel Container */}
           <div className=" relative">
             <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
