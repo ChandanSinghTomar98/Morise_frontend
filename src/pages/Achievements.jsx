@@ -36,7 +36,7 @@ const Achievements = () => {
   return (
     <>
     <Carousel/>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16">
+      <div className="min-h-screen py-16">
         <div className="container mx-auto px-4">
           <h2
             className="text-center text-5xl font-bold text-gray-900 mb-16 tracking-tight"

@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Info, UserRoundPen, CircleUser, House } from "lucide-react";
+import { Phone, Info, Award, Settings, House } from "lucide-react";
 
 function Sidebar({ onSupportClick }) {
   const location = useLocation();
 
   const navItems = [
     {
-      path: "/profile",
-      icon: UserRoundPen,
+      path: "/achievements",
+      icon: Award,
       // color: "text-red-500",
       color: "text-primary",
       onClick: null,
@@ -33,14 +33,13 @@ function Sidebar({ onSupportClick }) {
       color: "text-primary",
       onClick: null,
     },
-    
+
     {
       path: "/account",
-      icon: CircleUser,
+      icon: Settings,
       color: "text-primary",
       onClick: null,
     },
-   
   ];
 
   const renderNavItem = ({ path, icon: Icon, color, onClick, size }) => {
