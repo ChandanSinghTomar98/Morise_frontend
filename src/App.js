@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
+import React,{Suspense} from "react";
 import { routes } from "./routes";
 import Layout from "./layouts/Layout";
-import ProtectedRoute from "./components/ProtectedRoutes";
+//import ProtectedRoute from "./components/ProtectedRoutes";
+const ProtectedRoute = React.lazy(() => import("./components/ProtectedRoutes"));
 function App() {
 
   return (
@@ -11,7 +13,11 @@ function App() {
           <Route
             key={index}
             path={route}
-            element={<ProtectedRoute component={component} auth={auth} />}
+            element={
+              <Suspense>
+                <ProtectedRoute component={component} auth={auth} />
+              </Suspense>
+            }
           />
         ))}
       </Route>

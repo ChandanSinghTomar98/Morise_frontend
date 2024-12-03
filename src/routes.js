@@ -107,7 +107,7 @@ export const routes = [
     title: "Query Form",
     Icon: "",
     route: "/queryForm",
-    component: <QueryForm />,
+    component: QueryForm ,
   },
   {
     auth: false,
