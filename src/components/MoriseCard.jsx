@@ -82,6 +82,7 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
           <h1 className="text-center text-yellow-600 font-bold text-2xl mb-4">
             MORISE CARD
           </h1>
+<<<<<<< Updated upstream
           <div className="flex flex-row items-center gap-6 md:gap-20 lg:gap-20">
             {user ? (
               <>
@@ -129,6 +130,34 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
                 </button>
               </div>
             )}
+=======
+
+          <div className="flex flex-row items-center gap-4 sm:gap-6">
+            <div className="w-24 h-24 md:w-32 md:h-32 lg:w-32 lg:h-32 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <svg
+                className="w-16 h-16 text-gray-200"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM21 20a9 9 0 1 0-18 0" />
+              </svg>
+            </div>
+
+            <div className="flex-1  text-end space-y-1.5 sm:space-y-2">
+              <p className="font-bold text-base sm:text-lg">
+                {user?.fullName || "John Doe"}
+              </p>
+              <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                Software Engineer
+              </p>
+              <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                BLOOD GROUP: A+
+              </p>
+              <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                {user?.email || "john@example.com"}
+              </p>
+            </div>
+>>>>>>> Stashed changes
           </div>
           <p className="text-center text-xs sm:text-sm font-medium text-gray-500 mt-6">
             A single card that opens doors to your international career.

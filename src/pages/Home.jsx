@@ -5,12 +5,21 @@ import { Download } from "lucide-react";
 import { CreditCard, Phone, Share2 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { CheckCircle, DollarSign, Shield, Star } from "lucide-react";
+<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
 import { getUserById } from "../services/api/UserProfileApiManager";
+=======
+import { AuthContext } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { getUserById } from "../services/UserProfileApiManager";
+import { getTestimonials } from "../services/TestimonialsApiManager";
+import Images from "../constants/Images";
+>>>>>>> Stashed changes
 import MoriseCard from "../components/MoriseCard";
 import ContactModel from "../components/ContactModel";
 import Testimonials from "../components/Testimonials";
 import { AuthContext } from "../context/AuthContext";
+
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -90,12 +99,79 @@ function Home() {
     }
   }, []);
 
+<<<<<<< Updated upstream
+=======
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    if (id && token) {
+      getTestimonialses(id, token)
+        .then((res) => {
+          const data = res.data.data;
+          setTestimonialss(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data", error);
+        });
+    }
+  }, []);
+
+  const testimonials = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      role: "Software Engineer",
+      company: "Tech Solutions Inc.",
+      rating: 5,
+      testimonial:
+        "Morise helped me achieve my dream job abroad. The process was smooth and professional.",
+      videoUrl: Images.video1,
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      role: "Data Scientist",
+      company: "Data Analytics Pro",
+      rating: 5,
+      testimonial:
+        "Outstanding support throughout my visa application process. Highly recommended!",
+      videoUrl: Images.video2,
+    },
+    {
+      id: 3,
+      name: "Emma Williams",
+      role: "Product Manager",
+      company: "Innovation Hub",
+      rating: 5,
+      testimonial:
+        "The Morise team made my international career transition seamless and stress-free.",
+      videoUrl: Images.video3,
+    },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === testimonial?.length - 1 ? 0 : prev + 1
+      );
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [testimonial?.length]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+>>>>>>> Stashed changes
   return (
     <Container>
-      <div className=" mx-auto py-5 ">
+      <div className="mx-auto py-5 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
           <MoriseCard isactive={true} />
 
+<<<<<<< Updated upstream
           {/* Upload Documents Section */}
           <div
             className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
@@ -110,14 +186,35 @@ function Home() {
             {/* Content */}
             <div className="relative text-white p-6 rounded-lg text-center">
               <h2 className="text-lg md:text-2xl lg:text-2xl font-semibold mb-6 leading-relaxed">
+=======
+          <div
+            className="relative order-2 md:order-none p-8 rounded-lg mt-5 shadow-lg border border-gray-300 mx-auto overflow-hidden"
+            style={{
+              backgroundImage: `url(${Images.BackgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              // opacity: 0.8,
+            }}
+          >
+             <div className="absolute inset-0 bg-black/40"></div>
+            {/* Content */}
+            <div className="relative text-white p-6 rounded-lg text-center">
+              <h2 className="text-xl font-semibold mb-6 leading-relaxed">
+>>>>>>> Stashed changes
                 Upload your documents securely for quick processing <br /> or
                 get the assistance you need.
               </h2>
               <Link
                 to="/documents"
+<<<<<<< Updated upstream
                 className="inline-block bg-primary text-white hover:bg-blu-500  py-3 px-8 rounded-full font-medium shadow-md transition-transform duration-300 transform hover:scale-105"
               >
                 Get Started
+=======
+                className="inline-block bg-white text-primary hover:bg-gray-100 hover:text-secondary py-3 px-8 rounded-full font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+              >
+                Get Started / Need Assistance
+>>>>>>> Stashed changes
               </Link>
             </div>
           </div>
@@ -146,14 +243,21 @@ function Home() {
 
           {/* Share Services Section */}
           <div>
+<<<<<<< Updated upstream
             <div className="bg-white mx-auto rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-center justify-between gap-6">
               {/* Content */}
               <div className="flex items-center gap-4">
                 <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
+=======
+            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center space-x-4">
+                <div className="w-2 h-12 bg-blue-600 rounded-full hidden sm:block"></div>
+>>>>>>> Stashed changes
                 <h2 className="text-xl font-semibold text-gray-800">
                   Share Our Services
                 </h2>
               </div>
+<<<<<<< Updated upstream
 
               {/* Button */}
               <button
@@ -162,6 +266,15 @@ function Home() {
               >
                 <Share2 className="w-5 h-5" />
                 <span className="font-medium text-sm">SHARE</span>
+=======
+              <button
+                onClick={handleShare}
+                className="bg-blue-600 w-full sm:w-auto text-center
+                 hover:bg-blue-700 text-white px-6 py-3 rounded-full flex items-center justify-center space-x-2 transition-colors duration-300"
+              >
+                <Share2 className="w-5 h-5" />
+                <span className="font-medium">SHARE</span>
+>>>>>>> Stashed changes
               </button>
             </div>
           </div>
