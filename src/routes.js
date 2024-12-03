@@ -40,7 +40,7 @@ export const routes = [
     bar: false,
   },
   {
-    auth: true,
+    auth: false,
     role: "user",
     title: "Achievements",
     Icon: "",
