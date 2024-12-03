@@ -62,11 +62,12 @@ function Login() {
     try {
       setIsLoading(true);
       const response = await loginUser(formData);
-        
+
       if (response.data.status === 200) {
         Cookies.set("authToken", response.data.data.token, { expires: 1 });
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("userId", response.data.data.userId);
+        localStorage.setItem("authlocal", true);
         login(response.data.data.token);
         navigate("/");
       } else {

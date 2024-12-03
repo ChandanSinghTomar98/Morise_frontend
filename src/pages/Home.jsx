@@ -149,7 +149,7 @@ function Home() {
         {/ why choose us /} */}
         <div className="p-4 mt-10 ">
           <div className="text-center mb-12">
-            <h2 class="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
               Why Choose Us?
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -223,7 +223,7 @@ function Home() {
         {/* {/ testimonial /} */}
         <div className="pt-16 px-4">
           <div className="max-w-6xl mx-auto mb-12 text-center">
-            <h2 class="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
               What Our Clients Say
             </h2>
             <p className="text-lg text-gray-600">
