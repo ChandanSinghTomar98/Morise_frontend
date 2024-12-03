@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Send, CircleHelp } from "lucide-react";
 import { submitQuery } from "../services/api/QueryApiManager";
+import { Toast } from "./Toast";
 
 const QueryForm = () => {
   const [title, setTitle] = useState("");
@@ -15,7 +16,14 @@ const QueryForm = () => {
         description,
         userId,
       });
-      console.log(response);
+      if (response.status === 200) {
+        Toast.fire({
+          icon: "success",
+          title: "Your Query submitted successfully",
+        });
+        setTitle("");
+        setDescription("");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -30,8 +38,8 @@ const QueryForm = () => {
   };
 
   return (
-    <div className="flex h-full flex-col items-center justify-center">
-      <div className="max-w-md mx-auto p-6 bg-white shadow-2xl rounded-2xl border border-gray-100 transform transition-all duration-300">
+    <div className=" h-full items-center justify-center">
+      <div className="max-w-3xl mx-auto p-6 bg-white shadow-2xl rounded-2xl border border-gray-100 transform transition-all duration-300">
         <div className="flex items-center justify-center mb-6">
           <CircleHelp className="w-12 h-12 text-blue-600 mr-3" />
           <h2 className="text-2xl font-bold text-gray-800">

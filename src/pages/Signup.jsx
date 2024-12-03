@@ -7,7 +7,7 @@ import { Toast } from "../components/Toast";
 function Signup() {
   const [formData, setFormData] = useState({
     initial: "",
-    name: "",
+    fullName: "",
     email: "",
     password: "",
     phone: "",
@@ -105,15 +105,6 @@ function Signup() {
       ) {
         newErrors.password =
           "Password must contain uppercase, lowercase, number, and special character.";
-      }
-    }
-
-    // Reference Code validation (enhanced)
-    if (formData.referenceCode.trim()) {
-      const codeRegex = /^[A-Z0-9]{6}$/i;
-      if (!codeRegex.test(formData.referenceCode)) {
-        newErrors.referenceCode =
-          "Reference code must be 6 alphanumeric characters.";
       }
     }
 

@@ -18,8 +18,6 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  console.log(phoneNo);
-
   const bookCall = async () => {
     if (!phoneNo) {
       alert("Please enter your phone number");
