@@ -3,9 +3,13 @@ import { submitDocuments } from "../services/api/DocumentsApiManager";
 import DocumentUploadModal from "../components/DocumentUploadModel";
 import DocumentUploadSuccess from "../components/DocumentUploadSuccess";
 import SignatureCanvas from "../components/SignatureCanvas";
+import { Toast } from "../components/Toast";
+import { useNavigate } from "react-router-dom";
+
 const Documents = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
+  const navigate = useNavigate();
   const qualificationLevels = [
     { value: "10th", label: "10th Standard" },
     { value: "12th", label: "12th Standard" },
@@ -142,12 +146,19 @@ const Documents = () => {
         formData.append("userId", userId);
 
         // API call to submit the form data
+
         const response = await submitDocuments(formData);
-        console.log("Response:", response);
         if (response.data.status === 200) {
           setIsSuccessDialogOpen(true);
+          setTimeout(() => {
+            setIsSuccessDialogOpen(false);
+            navigate("/");
+          }, 2000);
         } else {
-          console.log("error uploading documents");
+          Toast.fire({
+            icon: "error",
+            title: "Error uploading documents",
+          });
         }
       } catch (error) {
         console.error("Upload error:", error);

@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { X, PhoneCall, Mail } from "lucide-react";
-
+import { submitCallRequest } from "../services/api/BookCallApiManager";
+import { Toast } from "./Toast";
 const ContactModal = ({ isOpen, onClose }) => {
+  const [phoneNo, setPhone] = useState("");
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -15,6 +18,28 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  console.log(phoneNo);
+
+  const bookCall = async () => {
+    if (!phoneNo) {
+      alert("Please enter your phone number");
+      return;
+    }
+    try {
+      const response = await submitCallRequest({ phoneNo, userId });
+      if (response.status === 200) {
+        Toast.fire({
+          icon: "success",
+          title: "Call request submitted successfully",
+        });
+      }
+      setPhone("");
+      onClose();
+    } catch (error) {
+      console.error("Error submitting call request: ", error);
+      alert("Failed to submit your request. Please try again later.");
+    }
+  };
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="w-full max-w-lg sm:max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-fade-in relative">
@@ -43,6 +68,8 @@ const ContactModal = ({ isOpen, onClose }) => {
                 type="tel"
                 placeholder="Enter your phone number"
                 className="w-full p-3 pl-10 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
+                value={phoneNo}
+                onChange={(e) => setPhone(e.target.value)}
               />
               <PhoneCall className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             </div>
@@ -62,7 +89,9 @@ const ContactModal = ({ isOpen, onClose }) => {
 
           {/* Action Button */}
           <button
-            onClick={onClose}
+            onClick={() => {
+              bookCall();
+            }}
             className="w-full py-3 bg-primary text-white rounded-full hover:bg-blue-600 transition-colors duration-300 font-semibold tracking-wide shadow-md hover:shadow-lg text-sm sm:text-base"
           >
             Request a Call
