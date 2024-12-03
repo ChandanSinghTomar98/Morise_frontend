@@ -54,6 +54,7 @@ const Account = () => {
     logout();
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+   localStorage.removeItem("authlocal");
     navigate("/signin");
   };
 

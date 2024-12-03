@@ -5,12 +5,12 @@ import { AuthContext } from "./context/AuthContext";
 import Layout from "./layouts/Layout";
 function App() {
   const { isAuthenticated } = useContext(AuthContext);
-
+ const authlocals= localStorage.getItem("authlocal");
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {routes.map(({ auth, route, component }, index) => {
-          if (auth && !isAuthenticated) {
+          if (auth && authlocals) {
             return (
               <Route
                 key={index}
