@@ -4,6 +4,8 @@ import { CreditCard, Phone, Share2 } from "lucide-react";
 import { CheckCircle, DollarSign, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getUserById } from "../services/api/UserProfileApiManager";
+import { getTestimonials } from "../services/api/TestimonialsApiManager";
+import Images from "../constants/Images";
 import MoriseCard from "../components/MoriseCard";
 import ContactModel from "../components/ContactModel";
 import Testimonials from "../components/Testimonials";
@@ -11,8 +13,6 @@ import Testimonials from "../components/Testimonials";
 function Home() {
   const [user, setUser] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  
 
   const bookCallBtn = () => {
     setIsModalOpen(true);
@@ -37,11 +37,10 @@ function Home() {
     }
   };
 
-
-
   useEffect(() => {
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
+
     const getUser = async (id, token) => {
       return await getUserById({
         id: id,
@@ -62,22 +61,31 @@ function Home() {
 
   return (
     <Container>
-      <div className=" mx-auto py-5 ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-          <MoriseCard isactive={true} />
+      <div className="mx-auto py-5">
+        <marquee className="font-bold  text-[#CA8A04] rounded-md tracking-wide ">
+          <p>
+            {" "}
+            Welcome to Morise – Your trusted partner for global opportunities!
+          </p>
+        </marquee>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-32 lg:px-32">
+          {/* {/ Morise Card Section /} */}
+          <div>
+            <MoriseCard isactive={true} user={user} />
+          </div>
 
-          {/* Upload Documents Section */}
+          {/* {/ Upload Documents Section /} */}
           <div
             className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
             style={{
-              // backgroundImage: `url(${Images.BgImg3})`,
+              backgroundImage: `url(${Images.BgImg3})`,
               backgroundPosition: "top",
               backgroundAttachment: "fixed",
             }}
           >
-            {/* Background Overlay */}
+            {/* {/ Background Overlay /} */}
             <div className="absolute inset-0 bg-black/60"></div>
-            {/* Content */}
+            {/* {/ Content /} */}
             <div className="relative text-white p-6 rounded-lg text-center">
               <h2 className="text-lg md:text-2xl lg:text-2xl font-semibold mb-6 leading-relaxed">
                 Upload your documents securely for quick processing <br /> or
@@ -92,10 +100,10 @@ function Home() {
             </div>
           </div>
 
-          {/* Book a Call Section */}
+          {/* {/ Book a Call Section /} */}
           <div className="order-1 md:order-none">
             <div className="bg-white mx-auto rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-center justify-between gap-6">
-              {/* Content */}
+              {/* {/ Content /} */}
               <div className="flex items-center gap-4">
                 <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -103,9 +111,10 @@ function Home() {
                 </h2>
               </div>
 
+              {/* {/ Button /} */}
               <button
                 onClick={bookCallBtn}
-                className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-full transition-colors duration-200 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full shadow-md flex items-center justify-center gap-2 transition-transform duration-300 transform hover:scale-105"
               >
                 <Phone className="w-5 h-5" />
                 <span className="font-medium text-sm">BOOK A CALL</span>
@@ -114,10 +123,10 @@ function Home() {
           </div>
           <ContactModel isOpen={isModalOpen} onClose={closeModal} />
 
-          {/* Share Services Section */}
+          {/* {/ Share Services Section /} */}
           <div>
             <div className="bg-white mx-auto rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-center justify-between gap-6">
-              {/* Content */}
+              {/* {/ Content /} */}
               <div className="flex items-center gap-4">
                 <div className="w-2 h-12 rounded-full bg-primary hidden sm:block"></div>
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -125,7 +134,7 @@ function Home() {
                 </h2>
               </div>
 
-              {/* Button */}
+              {/* {/ Button /} */}
               <button
                 onClick={handleShare}
                 className="w-full sm:w-auto bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full shadow-md flex items-center justify-center gap-2 transition-transform duration-300 transform hover:scale-105"
@@ -136,8 +145,8 @@ function Home() {
             </div>
           </div>
         </div>
-
-        {/* why choose us */}
+        {/* 
+        {/ why choose us /} */}
         <div className="p-4 mt-10 ">
           <div className="text-center mb-12">
             <h2 class="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
@@ -211,7 +220,7 @@ function Home() {
           </div>
         </div>
 
-        {/* testimonial */}
+        {/* {/ testimonial /} */}
         <div className="pt-16 px-4">
           <div className="max-w-6xl mx-auto mb-12 text-center">
             <h2 class="text-2xl md:text-4xl font-bold text-[#275791] mb-4">
