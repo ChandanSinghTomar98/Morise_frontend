@@ -18,7 +18,7 @@ export const routes = [
     title: "Home",
     Icon: "",
     route: "/",
-    component: <Home />,
+    component: Home ,
     bar: false,
   },
   {
@@ -27,7 +27,7 @@ export const routes = [
     title: "About",
     Icon: "",
     route: "/about",
-    component: <About />,
+    component: About ,
     bar: false,
   },
   {
@@ -36,7 +36,7 @@ export const routes = [
     title: "Profile",
     Icon: "",
     route: "/profile",
-    component: <Profile />,
+    component: Profile ,
     bar: false,
   },
   {
@@ -45,7 +45,7 @@ export const routes = [
     title: "Achievements",
     Icon: "",
     route: "/achievements",
-    component: <Achievements />,
+    component: Achievements ,
     bar: false,
   },
   {
@@ -54,7 +54,7 @@ export const routes = [
     title: "Certificates",
     Icon: "",
     route: "/certificate",
-    component: <Certificate />,
+    component: Certificate ,
     bar: false,
   },
   {
@@ -63,7 +63,7 @@ export const routes = [
     title: "Documents",
     Icon: "",
     route: "/documents",
-    component: <Documents />,
+    component: Documents ,
     bar: false,
   },
   {
@@ -72,7 +72,7 @@ export const routes = [
     title: "Account",
     Icon: "",
     route: "/account",
-    component: <Account />,
+    component: Account ,
     bar: false,
   },
   {
@@ -81,7 +81,7 @@ export const routes = [
     title: "referals",
     Icon: "",
     route: "/referals",
-    component: <Referals />,
+    component: Referals ,
     bar: false,
   },
   {
@@ -90,7 +90,7 @@ export const routes = [
     title: "rewards",
     Icon: "",
     route: "/rewards",
-    component: <Rewards />,
+    component: Rewards ,
     bar: false,
   },
   {
@@ -99,7 +99,7 @@ export const routes = [
     title: "Morise Card",
     Icon: "",
     route: "/morisecard",
-    component: <MoriseCard />,
+    component: MoriseCard ,
   },
   {
     auth: false,
@@ -115,7 +115,7 @@ export const routes = [
     title: "Sign In",
     Icon: "",
     route: "/signin",
-    component: <Login />,
+    component: Login ,
   },
   {
     auth: false,
@@ -123,6 +123,6 @@ export const routes = [
     title: "Sign Up",
     Icon: "",
     route: "/signup",
-    component: <Signup />,
+    component: Signup,
   },
 ];
