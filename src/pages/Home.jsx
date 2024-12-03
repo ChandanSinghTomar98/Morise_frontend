@@ -68,7 +68,7 @@ function Home() {
             Welcome to Morise – Your trusted partner for global opportunities!
           </p>
         </marquee>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-32 lg:px-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 ">
           {/* {/ Morise Card Section /} */}
           <div>
             <MoriseCard isactive={true} user={user} />
@@ -76,7 +76,7 @@ function Home() {
 
           {/* {/ Upload Documents Section /} */}
           <div
-            className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-lg shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
+            className="face-card relative max-w-5xl order-2 md:order-none  p-8 rounded-2xl shadow-lg border border-gray-300 overflow-hidden bg-cover bg-center"
             style={{
               backgroundImage: `url(${Images.BgImg3})`,
               backgroundPosition: "top",

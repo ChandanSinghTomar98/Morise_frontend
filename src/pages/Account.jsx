@@ -78,7 +78,7 @@ const Account = () => {
             {/* Header Section */}
             <div className="space-y-4 mb-8">
               <h1 className="text-2xl font-bold">
-                Hi  ,{user?.initial} {user?.name}
+                Hi ,{user?.initial} {user?.name}
               </h1>
               <p className="text-blue-700 font-medium md:pr-8">
                 The Morise Card is your ultimate career companion. Register now
@@ -93,7 +93,7 @@ const Account = () => {
               <span className="font-medium">Profile Status</span>
               <span
                 className={`font-medium ${
-                  user?.profileStatus ? "text-green-500" : "text-red-600" 
+                  user?.profileStatus ? "text-green-500" : "text-red-600"
                 }`}
               >
                 {user?.profileStatus ? "Active" : "Inactive"}
@@ -126,7 +126,10 @@ const Account = () => {
           <div className="space-y-4">
             {/* <div className="hidden md:block h-32"></div>{" "} */}
             {/* Spacer for desktop alignment */}
-            <Link to="/queryForm" className="block text-center w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
+            <Link
+              to="/queryForm"
+              className="block text-center w-full bg-primary hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors"
+            >
               RAISE A TICKET
             </Link>
             {/* <button className="w-full bg-blue-700 hover:bg-blue-800 text-yellow-300 font-bold py-4 px-4 rounded-lg transition-colors">
