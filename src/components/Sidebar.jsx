@@ -71,6 +71,7 @@ function Sidebar({ onSupportClick }) {
               : "sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-10 lg:h-10" 
           }`}
         />
+        
       </>
     );
 
