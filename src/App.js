@@ -15,7 +15,7 @@ function App() {
             path={route}
             element={
               <Suspense>
-                <ProtectedRoute component={component} auth={auth} />
+                <ProtectedRoute component={component} auth={auth} path={route}/>
               </Suspense>
             }
           />

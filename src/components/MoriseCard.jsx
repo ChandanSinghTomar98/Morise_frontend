@@ -10,7 +10,7 @@ const MoriseCard = forwardRef(({ user, isactive }, ref) => {
   const handleRegister = () => {
     navigate("/signup");
   };
-  console.log("user", user);
+ 
 
   const getBase64ImageFromUrl = async (imageUrl) => {
     const response = await fetch(imageUrl);

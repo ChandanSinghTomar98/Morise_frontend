@@ -28,7 +28,7 @@ export const routes = [
     title: "Payment",
     Icon: "",
     route: "/payment",
-    component: Payment,
+    component: Payment ,
     bar: false,
   },
   {
