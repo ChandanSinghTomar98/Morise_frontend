@@ -152,7 +152,7 @@ const Documents = () => {
           setIsSuccessDialogOpen(true);
           setTimeout(() => {
             setIsSuccessDialogOpen(false);
-            navigate("/");
+            navigate("/payment");
           }, 2000);
         } else {
           Toast.fire({
