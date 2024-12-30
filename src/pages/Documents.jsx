@@ -11,6 +11,7 @@ const Documents = () => {
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
   const navigate = useNavigate();
   const qualificationLevels = [
+    { value: "noeducation", label: "Below 10th education" },
     { value: "10th", label: "10th Standard" },
     { value: "12th", label: "12th Standard" },
     { value: "undergraduate", label: "Undergraduate" },
@@ -75,11 +76,12 @@ const Documents = () => {
       { label: "Pan Card", field: "panFile" },
       { label: "Passport Size Photo", field: "image" },
       { label: "CV", field: "cv" },
-      { label: "10th Marksheet", field: "matriculation" },
+      // { label: "10th Marksheet", field: "matriculation" },
     ];
 
     // Add additional documents based on qualification
     const additionalDocuments = {
+      "10th": [{ label: "10th Marksheet", field: "matriculation" }],
       "12th": [{ label: "12th Marksheet", field: "intermediate" }],
       undergraduate: [
         { label: "12th Marksheet", field: "intermediate" },

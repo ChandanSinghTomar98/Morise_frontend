@@ -7,72 +7,139 @@ const PaymentForm = () => {
   const [amount, setAmount] = useState(fixedAmount);
   const [loading, setLoading] = useState(false);
   
+  const RAZORPAY_KEY_ID = "rzp_test_T09tRz2hjNXFll";
   
-  const redirectToTransaction = (mid,token,access) => {
-  
-      const url = `https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction&merchant_id=${mid}&encRequest=${token}&access_code=${access}`;
-    window.location.href = url; // This will redirect to the URL
-  };
-
  
-  const handlePayment = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  // const handlePayment = async () => {
+   
+  //   setLoading(true);
 
-    try {
-      // Send the amount to the backend to initiate payment
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/payment",
-        {
-          amount,
-        }
-      );
+  //   try {
+  //     // Send the amount to the backend to initiate payment
+  //     const response = await axios.post(
+  //       "http://localhost:3000/api/v1/payment",
+  //       {
+  //         amount,
+  //       }
+  //     );
 
-      // Extract the payment form data
-      const paymentData = response.data.data.data;
-      const token = response.data.data.token;
-      const mid = paymentData.merchant_id;
-      const access = paymentData.access_code;
-      console.log("paymentData", paymentData);
-      console.log("merchant_id", paymentData.merchant_id);
-      console.log("access_code", paymentData.access_code);
-      console.log("token", token);
+  //     // Extract the payment form data
+  //     const paymentData = response.data.data.data;
+  //     const token = response.data.data.token;
+  //     const paymentUrl = response.data.data.paymentUrl;
+  //     const mid = paymentData.merchant_id;
+  //     const access = paymentData.access_code;
+     
 
-      // Save the payment data in localStorage
-      localStorage.setItem("data", JSON.stringify(paymentData));
+  //     // Save the payment data in localStorage
+  //     localStorage.setItem("data", JSON.stringify(paymentData));
 
-      // Construct the payment URL
-      // const paymentUrl = `https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&merchant_id=${paymentData.merchant_id}&encRequest=${token}&access_code=${paymentData.access_code}`;
 
-       const paymentUrl = `https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction&merchant_id=${paymentData.merchant_id}&encRequest=${token}&access_code=${paymentData.access_code}`;
+  //     // // Open the payment URL in a new tab
+  //      window.open(paymentUrl, "_blank");
+  //     // window.location.href = paymentUrl;
+     
+  //   } catch (error) {
+  //     console.error("Error initiating payment:", error);
+  //   } finally {
+  //     setLoading(false); // Set loading state back to false once the process is complete
+  //   }
+  // };
 
-      // console.log("Payment URL:", paymentUrl); // Log the constructed URL
+//  const handlePayment = async () => {
+//    setLoading(true);
 
-      // // Open the payment URL in a new tab
-      window.open(paymentUrl, "_blank");
-      // redirectToTransaction(mid,token,access)
-    } catch (error) {
-      console.error("Error initiating payment:", error);
-    } finally {
-      setLoading(false); // Set loading state back to false once the process is complete
-    }
-  };
+//    try {
+//      // Make the API request to your backend to get the payment URL
+//      const response = await axios.post("http://localhost:3000/api/v1/payment", {
+//        amount,
+//      });
+
+//      const paymentUrl = response.data.data.paymentUrl;
+
+//      if (paymentUrl) {
+//        // Redirect to the payment gateway URL in the same tab
+//        window.location.href = paymentUrl;
+
+//        // Or, open it in a new tab
+//        // window.open(paymentUrl, "_blank");
+//      } else {
+//        console.error("Payment URL not found");
+//        alert("There was an error getting the payment URL.");
+//      }
+//    } catch (error) {
+//      console.error("Error initiating payment:", error);
+//      alert("There was an error initiating the payment.");
+//    } finally {
+//      setLoading(false);
+//    }
+//  };
+
+
+    const handlePayment = async () => {
+      try {
+        // Step 1: Create an order on the backend
+        const { data: order } = await axios.post(
+          "https://api.trymorise.com/api/v1/payment",
+          {
+            amount: fixedAmount, // Amount in INR
+            currency: "INR",
+          }
+        );
+        console.log("order.id", order);
+const id=localStorage.getItem("userId");
+        // Step 2: Initialize Razorpay
+        const options = {
+          key: "rzp_live_fj18JIt6W3Ts2G", // Replace with your Razorpay key
+          amount: order.data.data.amount,
+          currency: order.data.data.currency,
+          name: "Your Company",
+          description: "Test Transaction",
+          order_id: order.data.data.id,
+          handler: async function (response) {
+            // Step 3: Verify the payment
+            console.log("Razorpay response:", response);
+            const { data } = await axios.post(
+              "https://api.trymorise.com/api/v1/payment/response",
+              {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                user_id: localStorage.getItem("userId"),
+                order_id: order.data.data.id,
+                // name: user.name,
+                // email: user.email,
+                amount: fixedAmount,
+              }
+            );
+            console.log("data", data.data.result);
+            if (data.data.success) {
+              alert("Payment Successful");
+            } else {
+              alert("Payment Verification Failed");
+            }
+          },
+          prefill: {
+            name: "John Doe",
+            email: "john.doe@example.com",
+            contact: "9999999999",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } catch (error) {
+        console.error(error);
+        alert("Payment failed. Please try again.");
+      }
+    };
+
   return (
-    // <div className="mt-6 ml-6">
-    //   <h1>Make a Payment</h1>
-    //   <form onSubmit={handlePayment}>
-    //     <input
-    //       type="number"
-    //       value={amount}
-    //       onChange={(e) => setAmount(e.target.value)}
-    //       placeholder="Enter amount"
-    //       required
-    //     />
-    //     <button type="submit" disabled={loading} className="bg-grey">
-    //       {loading ? "Processing..." : "Proceed to Payment"}
-    //     </button>
-    //   </form>
-    // </div>
+  
+   
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden mt-10">
       <div className="p-6 text-center bg-gray-50">
         <div className="text-xl font-semibold text-gray-800 mb-2">
